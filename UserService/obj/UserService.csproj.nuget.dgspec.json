@@ -1,33 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\UserService\\UserService.csproj": {}
+    "D:\\Personal\\Tiktokish\\Code\\UserService\\UserService.csproj": {}
   },
   "projects": {
-    "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\UserService\\UserService.csproj": {
+    "D:\\Personal\\Tiktokish\\Code\\UserService\\UserService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\UserService\\UserService.csproj",
+        "projectUniqueName": "D:\\Personal\\Tiktokish\\Code\\UserService\\UserService.csproj",
         "projectName": "UserService",
-        "projectPath": "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\UserService\\UserService.csproj",
-        "packagesPath": "C:\\Users\\razameer.ahmed\\.nuget\\packages\\",
-        "outputPath": "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\UserService\\obj\\",
+        "projectPath": "D:\\Personal\\Tiktokish\\Code\\UserService\\UserService.csproj",
+        "packagesPath": "C:\\Users\\khalid.halim\\.nuget\\packages\\",
+        "outputPath": "D:\\Personal\\Tiktokish\\Code\\UserService\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\razameer.ahmed\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.1.config",
+          "C:\\Users\\khalid.halim\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\DevExpress 20.1\\Components\\System\\Components\\Packages": {},
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -83,7 +81,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.416\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.414\\RuntimeIdentifierGraph.json"
         }
       }
     }
