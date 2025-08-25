@@ -1,0 +1,8 @@
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\Gateway\APIGsteway\obj\Debug\net8.0\APIGsteway.csproj.AssemblyReference.cache
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\Gateway\APIGsteway\obj\Debug\net8.0\APIGsteway.GeneratedMSBuildEditorConfig.editorconfig
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\Gateway\APIGsteway\obj\Debug\net8.0\APIGsteway.AssemblyInfoInputs.cache
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\Gateway\APIGsteway\obj\Debug\net8.0\APIGsteway.AssemblyInfo.cs
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\Gateway\APIGsteway\obj\Debug\net8.0\APIGsteway.csproj.CoreCompileInputs.cache
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\Gateway\APIGsteway\obj\Debug\net8.0\APIGsteway.MvcApplicationPartsAssemblyInfo.cs
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\Gateway\APIGsteway\obj\Debug\net8.0\APIGsteway.MvcApplicationPartsAssemblyInfo.cache
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\Gateway\APIGsteway\obj\Debug\net8.0\APIGsteway.sourcelink.json

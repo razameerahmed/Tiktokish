@@ -1,0 +1,6 @@
+@APIGsteway_HostAddress = http://localhost:5231
+
+GET {{APIGsteway_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

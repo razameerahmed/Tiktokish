@@ -15,7 +15,7 @@ namespace DataAccess
     
     public partial class TiktokishEntities : DbContext
     {
-        public TiktokishEntities()
+        public TiktokishEntities(object p)
             : base("name=TiktokishEntities")
         {
         }
