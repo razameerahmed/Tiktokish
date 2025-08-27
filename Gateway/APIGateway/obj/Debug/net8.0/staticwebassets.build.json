@@ -1,11 +1,23 @@
 {
   "Version": 1,
-  "Hash": "C6gI0fZiGSLdlKHrkutFNywqdaEGZiEgNz3/bMmynMs=",
+  "Hash": "dmsYptc3LUtZCMcaOkRdxa8rKQ/W65POKQM0RsvBluo=",
   "Source": "APIGateway",
   "BasePath": "_content/APIGateway",
   "Mode": "Default",
   "ManifestType": "Build",
-  "ReferencedProjectsConfiguration": [],
+  "ReferencedProjectsConfiguration": [
+    {
+      "Identity": "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\MicroServices\\UserService\\UserService.csproj",
+      "Version": 2,
+      "Source": "UserService",
+      "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework"
+    }
+  ],
   "DiscoveryPatterns": [],
   "Assets": []
 }

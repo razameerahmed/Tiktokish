@@ -6,9 +6,11 @@ namespace DataAccessLayer.Models;
 
 public partial class TiktokishContext : DbContext
 {
-    public TiktokishContext()
-    {
-    }
+	private readonly string _connectionString;
+	public TiktokishContext(string connectionString)
+		{
+			_connectionString = connectionString;
+		}
 
     public TiktokishContext(DbContextOptions<TiktokishContext> options)
         : base(options)

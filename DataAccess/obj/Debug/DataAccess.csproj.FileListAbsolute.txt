@@ -1,0 +1,12 @@
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\DataAccess\bin\Debug\DataAccess.exe.config
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\DataAccess\bin\Debug\DataAccess.exe
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\DataAccess\bin\Debug\DataAccess.pdb
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\DataAccess\bin\Debug\EntityFramework.dll
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\DataAccess\bin\Debug\EntityFramework.SqlServer.dll
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\DataAccess\bin\Debug\EntityFramework.xml
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\DataAccess\bin\Debug\EntityFramework.SqlServer.xml
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\DataAccess\obj\Debug\DataAccess.csproj.AssemblyReference.cache
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\DataAccess\obj\Debug\DataAccess.csproj.CoreCompileInputs.cache
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\DataAccess\obj\Debug\DataAccess.csproj.Up2Date
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\DataAccess\obj\Debug\DataAccess.exe
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\DataAccess\obj\Debug\DataAccess.pdb

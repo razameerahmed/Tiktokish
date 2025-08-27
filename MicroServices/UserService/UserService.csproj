@@ -19,4 +19,10 @@
     <ProjectReference Include="..\..\Database\DataAccessLayer\DataAccessLayer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="NLog.Web.AspNetCore">
+      <HintPath>C:\Users\razameer.ahmed\.nuget\packages\nlog.web.aspnetcore\6.0.3\lib\net8.0\NLog.Web.AspNetCore.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

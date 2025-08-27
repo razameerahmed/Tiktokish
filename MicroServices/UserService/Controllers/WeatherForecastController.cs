@@ -26,17 +26,25 @@ namespace UserService.Controllers
 		}
 
 		[HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        public IActionResult TestConnection()
         {
-            var rng = new Random();
+			return Ok(new
+			{
+				ok = true,
+				service = "UserService",
+				timeUtc = DateTime.UtcNow
+			});
 
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
-        }
+
+			//var rng = new Random();
+
+			//return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+			//{
+			//    Date = DateTime.Now.AddDays(index),
+			//    TemperatureC = rng.Next(-20, 55),
+			//    Summary = Summaries[rng.Next(Summaries.Length)]
+			//})
+			//.ToArray();
+		}
     }
 }

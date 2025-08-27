@@ -3,20 +3,49 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using UserService.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
 public class AuthController : ControllerBase
 {
-	[HttpPost("login")]
-	public IActionResult Login([FromBody] APIGateway.UserLogin user)
+
+	private readonly IHttpClientFactory _httpClientFactory;
+
+	public AuthController(IHttpClientFactory httpClientFactory)
 	{
-		if (user.Username == "admin" && user.Password == "password123456")
+		_httpClientFactory = httpClientFactory;
+	}
+
+
+	[HttpPost("login")]
+	public async Task<IActionResult> Login([FromBody] APIGateway.UserLogin user)
+	{
+		var client = _httpClientFactory.CreateClient("UserService");
+
+		var response = await client.GetAsync("WeatherForecast");
+
+		if (!response.IsSuccessStatusCode)
 		{
-			var token = GenerateJwtToken(user.Username);
-			return Ok(new { token });
+			var errorText = await response.Content.ReadAsStringAsync();
+			return StatusCode((int)response.StatusCode, new
+			{
+				ok = false,
+				from = "Gateway",
+				downstreamStatus = response.StatusCode,
+				downstreamBody = errorText
+			});
 		}
-		return Unauthorized();
+
+		var json = await response.Content.ReadAsStringAsync();
+		return Content(json, "application/json");
+
+		//if (user.Username == "admin" && user.Password == "password123456")
+		//{
+		//	var token = GenerateJwtToken(user.Username);
+		//	return Ok(new { token });
+		//}
+		//return Unauthorized();
 	}
 
 	private string GenerateJwtToken(string username)
