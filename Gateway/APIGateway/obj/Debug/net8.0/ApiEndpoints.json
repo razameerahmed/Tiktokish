@@ -16,6 +16,32 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "AuthController",
+    "Method": "LoginFromCache",
+    "RelativePath": "api/Auth/logincache",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "user",
+        "Type": "APIGateway.UserLogin",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "APIGateway.UserLogin",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "APIGateway.Controllers.HomeController",
     "Method": "GetValues",
     "RelativePath": "api/Home",

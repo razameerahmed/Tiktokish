@@ -13,8 +13,7 @@
           "EntityFramework": "6.5.1",
           "Microsoft.EntityFrameworkCore": "8.0.19",
           "Microsoft.EntityFrameworkCore.Design": "8.0.19",
-          "Microsoft.EntityFrameworkCore.SqlServer": "8.0.19",
-          "NLog.Web.AspNetCore": "6.0.0.0"
+          "Microsoft.EntityFrameworkCore.SqlServer": "8.0.19"
         },
         "runtime": {
           "UserService.dll": {}
@@ -987,7 +986,7 @@
       "DataAccess/1.0.0": {
         "runtime": {
           "DataAccess.exe": {
-            "assemblyVersion": "1.0.0",
+            "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
         }
@@ -999,16 +998,8 @@
         },
         "runtime": {
           "DataAccessLayer.dll": {
-            "assemblyVersion": "1.0.0",
+            "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
-          }
-        }
-      },
-      "NLog.Web.AspNetCore/6.0.0.0": {
-        "runtime": {
-          "NLog.Web.AspNetCore.dll": {
-            "assemblyVersion": "6.0.0.0",
-            "fileVersion": "6.0.3.1328"
           }
         }
       }
@@ -1608,11 +1599,6 @@
     },
     "DataAccessLayer/1.0.0": {
       "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "NLog.Web.AspNetCore/6.0.0.0": {
-      "type": "reference",
       "serviceable": false,
       "sha512": ""
     }

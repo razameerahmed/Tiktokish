@@ -8,11 +8,16 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.19" />
+    <PackageReference Include="Microsoft.AspNetCore.OutputCaching.StackExchangeRedis" Version="8.0.19" />
+    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="8.0.19" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="StackExchange.Redis" Version="2.9.11" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\BusinessLogic\Extension.Security\Extension.Security.csproj" />
+    <ProjectReference Include="..\..\CommonLib\Common\Common.csproj" />
     <ProjectReference Include="..\..\MicroServices\UserService\UserService.csproj" />
   </ItemGroup>
 

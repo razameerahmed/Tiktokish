@@ -1,5 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using APIGateway;
+using Common;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -11,17 +16,59 @@ public class AuthController : ControllerBase
 {
 
 	private readonly IHttpClientFactory _httpClientFactory;
+    private readonly IDistributedCache _cache;
+	private readonly TimeSpan _cacheExpiry = TimeSpan.FromMinutes(5);
+	private readonly IHTTPHelper _httpHelper;
+	private readonly IHTTPHelper _httpAuthHelper;
 
-	public AuthController(IHttpClientFactory httpClientFactory)
+	public AuthController(IHttpClientFactory httpClientFactory, IDistributedCache cache, Func<string, IHTTPHelper> httpHelperFactory)
 	{
 		_httpClientFactory = httpClientFactory;
+        _cache = cache;
+		_httpHelper = httpHelperFactory("https://localhost:44323");
+		_httpAuthHelper = httpHelperFactory("https://localhost:44333");
+
 	}
 
+	[HttpPost("logincache")]
+	public async Task<UserLogin> LoginFromCache([FromBody] APIGateway.UserLogin user)
+	{
+
+		_httpHelper.GetAsync("weatherforecast");
+		string cacheKey = $"Item_{user.Username}";
+
+		// Step 1: Try to get the item from Redis cache
+		var cachedItem = await _cache.GetStringAsync(cacheKey);
+		if (cachedItem != null)
+		{
+			Console.WriteLine("✅ Item retrieved from cache!");
+			return JsonConvert.DeserializeObject<UserLogin>(cachedItem);
+		}
+
+		// Step 2: Simulate database fetch (or real DB call in a production app)
+		var item = await FetchItemFromDatabase(user.Username);
+
+		// Step 3: Cache the item in Redis
+		await _cache.SetStringAsync(
+			cacheKey,
+			JsonConvert.SerializeObject(item),
+			new DistributedCacheEntryOptions { AbsoluteExpirationRelativeToNow = _cacheExpiry }
+		);
+
+		return item;
+	}
+
+	private Task<UserLogin> FetchItemFromDatabase(string userName)
+	{
+		// Simulating a databasUserLogine call
+		return Task.FromResult(new UserLogin { Username = "Khalid", Password = "Abc123" });
+	}
 
 	[HttpPost("login")]
 	public async Task<IActionResult> Login([FromBody] APIGateway.UserLogin user)
 	{
-		var client = _httpClientFactory.CreateClient("UserService");
+
+    var client = _httpClientFactory.CreateClient("UserService");
 
 		var response = await client.GetAsync("WeatherForecast");
 

@@ -1,3 +1,5 @@
+using Common;
+
 using Extension.Security;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -52,6 +54,32 @@ builder.Services.AddHttpClient("UserService", (sp, client) =>
 	var baseUrl = config["Services:UserServiceBaseUrl"];
 	client.BaseAddress = new Uri(baseUrl!); 
 	client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+});
+
+
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = builder.Configuration.GetConnectionString("Redis");
+    options.InstanceName = "MyRedisInstance";
+});
+
+builder.Services.AddStackExchangeRedisOutputCache(options =>
+{
+    options.Configuration = builder.Configuration.GetConnectionString("Redis");
+    options.InstanceName = "MyOutputCacheInstance";
+});
+
+builder.Services.AddOutputCache(options =>
+{
+    options.AddBasePolicy(builder => builder.Expire(TimeSpan.FromSeconds(60))); // Example policy
+});
+
+// Services Initiated
+//builder.Services.AddScoped<IHTTPHelper, HTTPHelper>();
+builder.Services.AddScoped<Func<string, IHTTPHelper>>(sp => baseAddress =>
+{
+	var factory = sp.GetRequiredService<IHttpClientFactory>();
+	return new HTTPHelper(baseAddress, factory);
 });
 
 builder.Services.AddAuthorization();

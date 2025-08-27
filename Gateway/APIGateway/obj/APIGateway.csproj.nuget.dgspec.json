@@ -1,41 +1,39 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\Gateway\\APIGateway\\APIGateway.csproj": {}
+    "D:\\Personal\\Tiktokish\\Code\\Gateway\\APIGateway\\APIGateway.csproj": {}
   },
   "projects": {
-    "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\BusinessLogic\\Extension.Security\\Extension.Security.csproj": {
+    "D:\\Personal\\Tiktokish\\Code\\BusinessLogic\\Extension.Security\\Extension.Security.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\BusinessLogic\\Extension.Security\\Extension.Security.csproj",
+        "projectUniqueName": "D:\\Personal\\Tiktokish\\Code\\BusinessLogic\\Extension.Security\\Extension.Security.csproj",
         "projectName": "Extension.Security",
-        "projectPath": "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\BusinessLogic\\Extension.Security\\Extension.Security.csproj",
-        "packagesPath": "C:\\Users\\razameer.ahmed\\.nuget\\packages\\",
-        "outputPath": "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\BusinessLogic\\Extension.Security\\obj\\",
+        "projectPath": "D:\\Personal\\Tiktokish\\Code\\BusinessLogic\\Extension.Security\\Extension.Security.csproj",
+        "packagesPath": "C:\\Users\\khalid.halim\\.nuget\\packages\\",
+        "outputPath": "D:\\Personal\\Tiktokish\\Code\\BusinessLogic\\Extension.Security\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\razameer.ahmed\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.1.config",
+          "C:\\Users\\khalid.halim\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\DevExpress 20.1\\Components\\System\\Components\\Packages": {},
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\Database\\DataAccessLayer\\DataAccessLayer.csproj": {
-                "projectPath": "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\Database\\DataAccessLayer\\DataAccessLayer.csproj"
+              "D:\\Personal\\Tiktokish\\Code\\Database\\DataAccessLayer\\DataAccessLayer.csproj": {
+                "projectPath": "D:\\Personal\\Tiktokish\\Code\\Database\\DataAccessLayer\\DataAccessLayer.csproj"
               }
             }
           }
@@ -49,7 +47,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -76,49 +75,32 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.413/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\DataAccess\\DataAccess.csproj": {
-      "restore": {
-        "projectUniqueName": "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\DataAccess\\DataAccess.csproj",
-        "projectName": "DataAccess",
-        "projectPath": "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\DataAccess\\DataAccess.csproj",
-        "frameworks": {
-          "net472": {
-            "projectReferences": {}
-          }
-        }
-      },
-      "frameworks": {
-        "net472": {}
-      }
-    },
-    "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\Database\\DataAccessLayer\\DataAccessLayer.csproj": {
+    "D:\\Personal\\Tiktokish\\Code\\CommonLib\\Common\\Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\Database\\DataAccessLayer\\DataAccessLayer.csproj",
-        "projectName": "DataAccessLayer",
-        "projectPath": "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\Database\\DataAccessLayer\\DataAccessLayer.csproj",
-        "packagesPath": "C:\\Users\\razameer.ahmed\\.nuget\\packages\\",
-        "outputPath": "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\Database\\DataAccessLayer\\obj\\",
+        "projectUniqueName": "D:\\Personal\\Tiktokish\\Code\\CommonLib\\Common\\Common.csproj",
+        "projectName": "Common",
+        "projectPath": "D:\\Personal\\Tiktokish\\Code\\CommonLib\\Common\\Common.csproj",
+        "packagesPath": "C:\\Users\\khalid.halim\\.nuget\\packages\\",
+        "outputPath": "D:\\Personal\\Tiktokish\\Code\\CommonLib\\Common\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\razameer.ahmed\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.1.config",
+          "C:\\Users\\khalid.halim\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\DevExpress 20.1\\Components\\System\\Components\\Packages": {},
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -136,7 +118,95 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.Extensions.Http": {
+              "target": "Package",
+              "version": "[9.0.8, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
         }
+      }
+    },
+    "D:\\Personal\\Tiktokish\\Code\\DataAccess\\DataAccess.csproj": {
+      "restore": {
+        "projectUniqueName": "D:\\Personal\\Tiktokish\\Code\\DataAccess\\DataAccess.csproj",
+        "projectName": "DataAccess",
+        "projectPath": "D:\\Personal\\Tiktokish\\Code\\DataAccess\\DataAccess.csproj",
+        "UsingMicrosoftNETSdk": false,
+        "frameworks": {
+          "net472": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net472": {}
+      }
+    },
+    "D:\\Personal\\Tiktokish\\Code\\Database\\DataAccessLayer\\DataAccessLayer.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Personal\\Tiktokish\\Code\\Database\\DataAccessLayer\\DataAccessLayer.csproj",
+        "projectName": "DataAccessLayer",
+        "projectPath": "D:\\Personal\\Tiktokish\\Code\\Database\\DataAccessLayer\\DataAccessLayer.csproj",
+        "packagesPath": "C:\\Users\\khalid.halim\\.nuget\\packages\\",
+        "outputPath": "D:\\Personal\\Tiktokish\\Code\\Database\\DataAccessLayer\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\khalid.halim\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -179,45 +249,46 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.413/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\Gateway\\APIGateway\\APIGateway.csproj": {
+    "D:\\Personal\\Tiktokish\\Code\\Gateway\\APIGateway\\APIGateway.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\Gateway\\APIGateway\\APIGateway.csproj",
+        "projectUniqueName": "D:\\Personal\\Tiktokish\\Code\\Gateway\\APIGateway\\APIGateway.csproj",
         "projectName": "APIGateway",
-        "projectPath": "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\Gateway\\APIGateway\\APIGateway.csproj",
-        "packagesPath": "C:\\Users\\razameer.ahmed\\.nuget\\packages\\",
-        "outputPath": "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\Gateway\\APIGateway\\obj\\",
+        "projectPath": "D:\\Personal\\Tiktokish\\Code\\Gateway\\APIGateway\\APIGateway.csproj",
+        "packagesPath": "C:\\Users\\khalid.halim\\.nuget\\packages\\",
+        "outputPath": "D:\\Personal\\Tiktokish\\Code\\Gateway\\APIGateway\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\razameer.ahmed\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.1.config",
+          "C:\\Users\\khalid.halim\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\DevExpress 20.1\\Components\\System\\Components\\Packages": {},
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\BusinessLogic\\Extension.Security\\Extension.Security.csproj": {
-                "projectPath": "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\BusinessLogic\\Extension.Security\\Extension.Security.csproj"
+              "D:\\Personal\\Tiktokish\\Code\\BusinessLogic\\Extension.Security\\Extension.Security.csproj": {
+                "projectPath": "D:\\Personal\\Tiktokish\\Code\\BusinessLogic\\Extension.Security\\Extension.Security.csproj"
               },
-              "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\MicroServices\\UserService\\UserService.csproj": {
-                "projectPath": "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\MicroServices\\UserService\\UserService.csproj"
+              "D:\\Personal\\Tiktokish\\Code\\CommonLib\\Common\\Common.csproj": {
+                "projectPath": "D:\\Personal\\Tiktokish\\Code\\CommonLib\\Common\\Common.csproj"
+              },
+              "D:\\Personal\\Tiktokish\\Code\\MicroServices\\UserService\\UserService.csproj": {
+                "projectPath": "D:\\Personal\\Tiktokish\\Code\\MicroServices\\UserService\\UserService.csproj"
               }
             }
           }
@@ -231,7 +302,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -240,6 +312,22 @@
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[8.0.19, )"
+            },
+            "Microsoft.AspNetCore.OutputCaching.StackExchangeRedis": {
+              "target": "Package",
+              "version": "[8.0.19, )"
+            },
+            "Microsoft.Extensions.Caching.StackExchangeRedis": {
+              "target": "Package",
+              "version": "[8.0.19, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
+            "StackExchange.Redis": {
+              "target": "Package",
+              "version": "[2.9.11, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
@@ -265,45 +353,43 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.413/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\MicroServices\\UserService\\UserService.csproj": {
+    "D:\\Personal\\Tiktokish\\Code\\MicroServices\\UserService\\UserService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\MicroServices\\UserService\\UserService.csproj",
+        "projectUniqueName": "D:\\Personal\\Tiktokish\\Code\\MicroServices\\UserService\\UserService.csproj",
         "projectName": "UserService",
-        "projectPath": "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\MicroServices\\UserService\\UserService.csproj",
-        "packagesPath": "C:\\Users\\razameer.ahmed\\.nuget\\packages\\",
-        "outputPath": "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\MicroServices\\UserService\\obj\\",
+        "projectPath": "D:\\Personal\\Tiktokish\\Code\\MicroServices\\UserService\\UserService.csproj",
+        "packagesPath": "C:\\Users\\khalid.halim\\.nuget\\packages\\",
+        "outputPath": "D:\\Personal\\Tiktokish\\Code\\MicroServices\\UserService\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\razameer.ahmed\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.1.config",
+          "C:\\Users\\khalid.halim\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\DevExpress 20.1\\Components\\System\\Components\\Packages": {},
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\DataAccess\\DataAccess.csproj": {
-                "projectPath": "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\DataAccess\\DataAccess.csproj"
+              "D:\\Personal\\Tiktokish\\Code\\DataAccess\\DataAccess.csproj": {
+                "projectPath": "D:\\Personal\\Tiktokish\\Code\\DataAccess\\DataAccess.csproj"
               },
-              "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\Database\\DataAccessLayer\\DataAccessLayer.csproj": {
-                "projectPath": "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\Database\\DataAccessLayer\\DataAccessLayer.csproj"
+              "D:\\Personal\\Tiktokish\\Code\\Database\\DataAccessLayer\\DataAccessLayer.csproj": {
+                "projectPath": "D:\\Personal\\Tiktokish\\Code\\Database\\DataAccessLayer\\DataAccessLayer.csproj"
               }
             }
           }
@@ -317,7 +403,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -361,7 +448,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.413/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

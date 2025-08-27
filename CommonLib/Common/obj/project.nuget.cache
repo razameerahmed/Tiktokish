@@ -1,8 +1,23 @@
 {
   "version": 2,
-  "dgSpecHash": "HOvP+lbqWYg=",
+  "dgSpecHash": "iQ7nrs9M4ns=",
   "success": true,
-  "projectFilePath": "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\CommonLib\\Common\\Common.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "D:\\Personal\\Tiktokish\\Code\\CommonLib\\Common\\Common.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\khalid.halim\\.nuget\\packages\\microsoft.extensions.configuration\\9.0.8\\microsoft.extensions.configuration.9.0.8.nupkg.sha512",
+    "C:\\Users\\khalid.halim\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\9.0.8\\microsoft.extensions.configuration.abstractions.9.0.8.nupkg.sha512",
+    "C:\\Users\\khalid.halim\\.nuget\\packages\\microsoft.extensions.configuration.binder\\9.0.8\\microsoft.extensions.configuration.binder.9.0.8.nupkg.sha512",
+    "C:\\Users\\khalid.halim\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\9.0.8\\microsoft.extensions.dependencyinjection.9.0.8.nupkg.sha512",
+    "C:\\Users\\khalid.halim\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\9.0.8\\microsoft.extensions.dependencyinjection.abstractions.9.0.8.nupkg.sha512",
+    "C:\\Users\\khalid.halim\\.nuget\\packages\\microsoft.extensions.diagnostics\\9.0.8\\microsoft.extensions.diagnostics.9.0.8.nupkg.sha512",
+    "C:\\Users\\khalid.halim\\.nuget\\packages\\microsoft.extensions.diagnostics.abstractions\\9.0.8\\microsoft.extensions.diagnostics.abstractions.9.0.8.nupkg.sha512",
+    "C:\\Users\\khalid.halim\\.nuget\\packages\\microsoft.extensions.http\\9.0.8\\microsoft.extensions.http.9.0.8.nupkg.sha512",
+    "C:\\Users\\khalid.halim\\.nuget\\packages\\microsoft.extensions.logging\\9.0.8\\microsoft.extensions.logging.9.0.8.nupkg.sha512",
+    "C:\\Users\\khalid.halim\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\9.0.8\\microsoft.extensions.logging.abstractions.9.0.8.nupkg.sha512",
+    "C:\\Users\\khalid.halim\\.nuget\\packages\\microsoft.extensions.options\\9.0.8\\microsoft.extensions.options.9.0.8.nupkg.sha512",
+    "C:\\Users\\khalid.halim\\.nuget\\packages\\microsoft.extensions.options.configurationextensions\\9.0.8\\microsoft.extensions.options.configurationextensions.9.0.8.nupkg.sha512",
+    "C:\\Users\\khalid.halim\\.nuget\\packages\\microsoft.extensions.primitives\\9.0.8\\microsoft.extensions.primitives.9.0.8.nupkg.sha512",
+    "C:\\Users\\khalid.halim\\.nuget\\packages\\system.diagnostics.diagnosticsource\\9.0.8\\system.diagnostics.diagnosticsource.9.0.8.nupkg.sha512"
+  ],
   "logs": []
 }

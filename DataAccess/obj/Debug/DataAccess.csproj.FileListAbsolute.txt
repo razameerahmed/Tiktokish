@@ -10,3 +10,16 @@ D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\DataAccess\obj\Deb
 D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\DataAccess\obj\Debug\DataAccess.csproj.Up2Date
 D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\DataAccess\obj\Debug\DataAccess.exe
 D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\DataAccess\obj\Debug\DataAccess.pdb
+D:\Personal\Tiktokish\Code\DataAccess\bin\Debug\DataAccess.exe.config
+D:\Personal\Tiktokish\Code\DataAccess\bin\Debug\DataAccess.exe
+D:\Personal\Tiktokish\Code\DataAccess\bin\Debug\DataAccess.pdb
+D:\Personal\Tiktokish\Code\DataAccess\bin\Debug\EntityFramework.dll
+D:\Personal\Tiktokish\Code\DataAccess\bin\Debug\EntityFramework.SqlServer.dll
+D:\Personal\Tiktokish\Code\DataAccess\bin\Debug\EntityFramework.xml
+D:\Personal\Tiktokish\Code\DataAccess\bin\Debug\EntityFramework.SqlServer.xml
+D:\Personal\Tiktokish\Code\DataAccess\obj\Debug\DataAccess.csproj.AssemblyReference.cache
+D:\Personal\Tiktokish\Code\DataAccess\obj\Debug\DataAccess.exe.config
+D:\Personal\Tiktokish\Code\DataAccess\obj\Debug\DataAccess.csproj.CoreCompileInputs.cache
+D:\Personal\Tiktokish\Code\DataAccess\obj\Debug\DataAccess.csproj.Up2Date
+D:\Personal\Tiktokish\Code\DataAccess\obj\Debug\DataAccess.exe
+D:\Personal\Tiktokish\Code\DataAccess\obj\Debug\DataAccess.pdb
