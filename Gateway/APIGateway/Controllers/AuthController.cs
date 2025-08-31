@@ -1,11 +1,15 @@
 ﻿using APIGateway;
 using Common;
+using Common.Implementation;
+using Common.Interface;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net.Http;
 using System.Security.Claims;
 using System.Text;
 using UserService.Controllers;
@@ -20,43 +24,60 @@ public class AuthController : ControllerBase
 	private readonly TimeSpan _cacheExpiry = TimeSpan.FromMinutes(5);
 	private readonly IHTTPHelper _httpHelper;
 	private readonly IHTTPHelper _httpAuthHelper;
+	private readonly IHttpContextAccessor _httpContextAccessor;
+	private readonly HttpClient _httpClient;
 
-	public AuthController(IHttpClientFactory httpClientFactory, IDistributedCache cache, Func<string, IHTTPHelper> httpHelperFactory)
+	public AuthController(IHttpClientFactory httpClientFactory, IDistributedCache cache, Func<string, IHTTPHelper> httpHelperFactory, IHttpContextAccessor httpContextAccessor, HttpClient httpClient)
 	{
 		_httpClientFactory = httpClientFactory;
         _cache = cache;
 		_httpHelper = httpHelperFactory("https://localhost:44323");
 		_httpAuthHelper = httpHelperFactory("https://localhost:44333");
+		_httpContextAccessor = httpContextAccessor;
+		_httpClient = httpClient;
 
 	}
 
 	[HttpPost("logincache")]
-	public async Task<UserLogin> LoginFromCache([FromBody] APIGateway.UserLogin user)
-	{
+    public async Task<UserLogin> LoginFromCache([FromBody] APIGateway.UserLogin user)
+    {
+        string cacheKey = "";
+        string correlationId = new Guid().ToString();
 
-		_httpHelper.GetAsync("weatherforecast");
-		string cacheKey = $"Item_{user.Username}";
+        try
+        {
+            ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), correlationId, "User", "machine name", this.GetType().Name, "User account created", 1);
 
-		// Step 1: Try to get the item from Redis cache
-		var cachedItem = await _cache.GetStringAsync(cacheKey);
-		if (cachedItem != null)
-		{
-			Console.WriteLine("✅ Item retrieved from cache!");
-			return JsonConvert.DeserializeObject<UserLogin>(cachedItem);
-		}
+            _ = _httpHelper.GetAsync("userservice");
 
-		// Step 2: Simulate database fetch (or real DB call in a production app)
-		var item = await FetchItemFromDatabase(user.Username);
+            cacheKey = $"Item_{user.Username}";
 
-		// Step 3: Cache the item in Redis
-		await _cache.SetStringAsync(
-			cacheKey,
-			JsonConvert.SerializeObject(item),
-			new DistributedCacheEntryOptions { AbsoluteExpirationRelativeToNow = _cacheExpiry }
-		);
+            // Step 1: Try to get the item from Redis cache
+            var cachedItem = await _cache.GetStringAsync(cacheKey);
+            if (cachedItem != null)
+            {
+                Console.WriteLine("✅ Item retrieved from cache!");
+                return JsonConvert.DeserializeObject<UserLogin>(cachedItem);
+            }
+        }
+        catch (Exception ex)
+        {
+            ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), correlationId, "User", "machine name", this.GetType().Name, ex.Message, 0, ex);
+            throw; // Fixed CA2200: Use 'throw;' to preserve stack trace
+        }
 
-		return item;
-	}
+        // Step 2: Simulate database fetch (or real DB call in a production app)
+        var item = await FetchItemFromDatabase(user.Username);
+
+        // Step 3: Cache the item in Redis
+        await _cache.SetStringAsync(
+            cacheKey,
+            JsonConvert.SerializeObject(item),
+            new DistributedCacheEntryOptions { AbsoluteExpirationRelativeToNow = _cacheExpiry }
+        );
+
+        return item;
+    }
 
 	private Task<UserLogin> FetchItemFromDatabase(string userName)
 	{
@@ -67,8 +88,11 @@ public class AuthController : ControllerBase
 	[HttpPost("login")]
 	public async Task<IActionResult> Login([FromBody] APIGateway.UserLogin user)
 	{
+		var correlationId = _httpContextAccessor.HttpContext.Request.Headers["X-Correlation-ID"].ToString();
 
-    var client = _httpClientFactory.CreateClient("UserService");
+		_httpClient.DefaultRequestHeaders.Add("X-Correlation-ID", correlationId);
+
+		var client = _httpClientFactory.CreateClient("UserService");
 
 		var response = await client.GetAsync("WeatherForecast");
 

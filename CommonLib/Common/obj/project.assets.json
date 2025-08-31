@@ -261,6 +261,56 @@
           "buildTransitive/net8.0/_._": {}
         }
       },
+      "NLog/6.0.3": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.1/NLog.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/NLog.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "NLog.Extensions.Logging/6.0.3": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Configuration.Abstractions": "8.0.0",
+          "Microsoft.Extensions.Logging": "8.0.0",
+          "NLog": "6.0.3"
+        },
+        "compile": {
+          "lib/net8.0/NLog.Extensions.Logging.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/NLog.Extensions.Logging.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "NLog.Web.AspNetCore/6.0.3": {
+        "type": "package",
+        "dependencies": {
+          "NLog.Extensions.Logging": "6.0.3"
+        },
+        "compile": {
+          "lib/net8.0/NLog.Web.AspNetCore.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/NLog.Web.AspNetCore.dll": {
+            "related": ".xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
       "System.Diagnostics.DiagnosticSource/9.0.8": {
         "type": "package",
         "compile": {
@@ -719,6 +769,72 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "NLog/6.0.3": {
+      "sha512": "5RMrpvadysflvDOi5ozD7aK1P+YL2DyZbQSxzE8qBKkw2pxPNOQA6vJtumcT6SuzE9qxhwGkQwMkLLaKnALwiw==",
+      "type": "package",
+      "path": "nlog/6.0.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "N.png",
+        "lib/net35/NLog.dll",
+        "lib/net35/NLog.xml",
+        "lib/net45/NLog.dll",
+        "lib/net45/NLog.xml",
+        "lib/net46/NLog.dll",
+        "lib/net46/NLog.xml",
+        "lib/netstandard2.0/NLog.dll",
+        "lib/netstandard2.0/NLog.xml",
+        "lib/netstandard2.1/NLog.dll",
+        "lib/netstandard2.1/NLog.xml",
+        "nlog.6.0.3.nupkg.sha512",
+        "nlog.nuspec"
+      ]
+    },
+    "NLog.Extensions.Logging/6.0.3": {
+      "sha512": "xQFejXRQG4l2ByhbnphDphHvf4wiOTUN7XGEB36/VpcB+HsTtB3KnWKaIgBBWjxM32bsDyyQqryh7y3KsOew4Q==",
+      "type": "package",
+      "path": "nlog.extensions.logging/6.0.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "N.png",
+        "README.md",
+        "lib/net462/NLog.Extensions.Logging.dll",
+        "lib/net462/NLog.Extensions.Logging.xml",
+        "lib/net6.0/NLog.Extensions.Logging.dll",
+        "lib/net6.0/NLog.Extensions.Logging.xml",
+        "lib/net8.0/NLog.Extensions.Logging.dll",
+        "lib/net8.0/NLog.Extensions.Logging.xml",
+        "lib/netstandard2.0/NLog.Extensions.Logging.dll",
+        "lib/netstandard2.0/NLog.Extensions.Logging.xml",
+        "lib/netstandard2.1/NLog.Extensions.Logging.dll",
+        "lib/netstandard2.1/NLog.Extensions.Logging.xml",
+        "nlog.extensions.logging.6.0.3.nupkg.sha512",
+        "nlog.extensions.logging.nuspec"
+      ]
+    },
+    "NLog.Web.AspNetCore/6.0.3": {
+      "sha512": "cp/NPhbp2SQ5eHnyPmWFP/9CyfgD1e+IMs8YdccxyBpzeed5wrDa0KjxSSTfDodERjISL/yPKzXsSCfpkgm78A==",
+      "type": "package",
+      "path": "nlog.web.aspnetcore/6.0.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "N.png",
+        "README.md",
+        "lib/net462/NLog.Web.AspNetCore.dll",
+        "lib/net462/NLog.Web.AspNetCore.xml",
+        "lib/net6.0/NLog.Web.AspNetCore.dll",
+        "lib/net6.0/NLog.Web.AspNetCore.xml",
+        "lib/net8.0/NLog.Web.AspNetCore.dll",
+        "lib/net8.0/NLog.Web.AspNetCore.xml",
+        "lib/netstandard2.0/NLog.Web.AspNetCore.dll",
+        "lib/netstandard2.0/NLog.Web.AspNetCore.xml",
+        "nlog.web.aspnetcore.6.0.3.nupkg.sha512",
+        "nlog.web.aspnetcore.nuspec"
+      ]
+    },
     "System.Diagnostics.DiagnosticSource/9.0.8": {
       "sha512": "Lj8/a1Hzli1z6jo8H9urc16GxkpVJtJM+W9fmivXMNu7nwzHziGkxn4vO0DFscMbudkEVKSezdDuHk5kgM0X/g==",
       "type": "package",
@@ -749,27 +865,28 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
-      "Microsoft.Extensions.Http >= 9.0.8"
+      "Microsoft.Extensions.Http >= 9.0.8",
+      "NLog.Web.AspNetCore >= 6.0.3"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\khalid.halim\\.nuget\\packages\\": {},
+    "C:\\Users\\Remi\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Personal\\Tiktokish\\Code\\CommonLib\\Common\\Common.csproj",
+      "projectUniqueName": "D:\\Live Work\\Tiktok China\\CommonLib\\Common\\Common.csproj",
       "projectName": "Common",
-      "projectPath": "D:\\Personal\\Tiktokish\\Code\\CommonLib\\Common\\Common.csproj",
-      "packagesPath": "C:\\Users\\khalid.halim\\.nuget\\packages\\",
-      "outputPath": "D:\\Personal\\Tiktokish\\Code\\CommonLib\\Common\\obj\\",
+      "projectPath": "D:\\Live Work\\Tiktok China\\CommonLib\\Common\\Common.csproj",
+      "packagesPath": "C:\\Users\\Remi\\.nuget\\packages\\",
+      "outputPath": "D:\\Live Work\\Tiktok China\\CommonLib\\Common\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\khalid.halim\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Remi\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -778,6 +895,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -805,6 +923,10 @@
           "Microsoft.Extensions.Http": {
             "target": "Package",
             "version": "[9.0.8, )"
+          },
+          "NLog.Web.AspNetCore": {
+            "target": "Package",
+            "version": "[6.0.3, )"
           }
         },
         "imports": [

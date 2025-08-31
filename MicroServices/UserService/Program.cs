@@ -1,26 +1,56 @@
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
+using Common.Implementation;
+using Common.Interface;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using NLog;
+using NLog.Web;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using UserService.Middleware;
 
-namespace UserService
+var logger = LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
+try
 {
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().Run();
-        }
+	var builder = WebApplication.CreateBuilder(args);
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
-    }
+    ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, "User Service Starting", ActionType.View.ToString(), "", "User", "machine name", "", "User account created", 1);
+
+    // Add services (like DI, controllers, DB, etc.)
+    builder.Services.AddControllers();
+
+	// NLog: setup NLog for Dependency injection
+	builder.Logging.ClearProviders();
+	builder.Host.UseNLog();
+
+	var app = builder.Build();
+
+
+	app.UseMiddleware<CorrelationIdMiddleware>();
+	app.UseMiddleware<LoggingCorrelationMiddleware>();
+
+	// Middleware pipeline
+	if (app.Environment.IsDevelopment())
+	{
+		app.UseDeveloperExceptionPage();
+	}
+
+	app.UseHttpsRedirection();
+
+	app.UseAuthorization();
+
+	app.MapControllers();
+	app.UseHttpsRedirection();
+	app.Run();
+}
+catch (Exception ex)
+{
+    //logger.Error(ex, "Stopped program because of exception");
+    ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, "Stopped program because of exception", ActionType.View.ToString(), "", "User", "machine name", "", ex.Message, 0, ex);
+
+    throw;
+}
+finally
+{
+	NLog.LogManager.Shutdown();
 }

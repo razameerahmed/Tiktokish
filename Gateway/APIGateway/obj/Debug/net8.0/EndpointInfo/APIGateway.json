@@ -96,6 +96,18 @@
         }
       }
     },
+    "/UserService": {
+      "get": {
+        "tags": [
+          "UserService"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/WeatherForecast": {
       "get": {
         "tags": [

@@ -879,7 +879,8 @@
       },
       "Common/1.0.0": {
         "dependencies": {
-          "Microsoft.Extensions.Http": "9.0.8"
+          "Microsoft.Extensions.Http": "9.0.8",
+          "NLog.Web.AspNetCore": "6.0.3"
         },
         "runtime": {
           "Common.dll": {
@@ -922,11 +923,13 @@
       },
       "UserService/1.0.0": {
         "dependencies": {
+          "Common": "1.0.0",
           "DataAccess": "1.0.0",
           "DataAccessLayer": "1.0.0",
           "EntityFramework": "6.5.1",
           "Microsoft.EntityFrameworkCore": "8.0.19",
-          "Microsoft.EntityFrameworkCore.SqlServer": "8.0.19"
+          "Microsoft.EntityFrameworkCore.SqlServer": "8.0.19",
+          "NLog.Web.AspNetCore": "6.0.3"
         },
         "runtime": {
           "UserService.dll": {
