@@ -13,7 +13,6 @@ namespace UserService.Middleware
 		{
 			_next = next;
 		}
-
 		public async Task InvokeAsync(HttpContext context)
 		{
 			if (!context.Request.Headers.ContainsKey(CorrelationHeader))

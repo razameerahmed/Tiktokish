@@ -7,12 +7,6 @@ namespace APIGateway.Controllers
 	[Route("api/[controller]")]
 	public class HomeController : Controller
 	{
-		//[HttpGet]
-		//public IActionResult Index()
-		//{
-		//	return View();
-		//}
-
 		[HttpGet]
 		[Authorize]
 		public IActionResult GetValues()

@@ -45,9 +45,7 @@ try
 }
 catch (Exception ex)
 {
-    //logger.Error(ex, "Stopped program because of exception");
     ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, "Stopped program because of exception", ActionType.View.ToString(), "", "User", "machine name", "", ex.Message, 0, ex);
-
     throw;
 }
 finally

@@ -21,6 +21,7 @@ namespace Common
 			_httpClient.BaseAddress = new Uri(baseAddress);
 			// Add default headers or other configurations here
 			_httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
+
 		}
 
 		public async Task<string> GetAsync(string endpoint)

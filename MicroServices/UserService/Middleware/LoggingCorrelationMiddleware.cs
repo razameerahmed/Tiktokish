@@ -21,7 +21,6 @@ namespace UserService.Middleware
 			MappedDiagnosticsLogicalContext.Set("CorrelationId", correlationId);
             ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), correlationId, "User", "machine name", this.GetType().Name, "User account created", 1);
 
-
             await _next(context);
 		}
 	}

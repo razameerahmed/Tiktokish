@@ -19,8 +19,6 @@ try
     //logger.Debug("Starting Gateway API...");
     ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, "Starting Gateway API...", ActionType.View.ToString(), "", "User", "machine name","", "User account created", 1);
 
-
-
     var builder = WebApplication.CreateBuilder(args);
 
 	// Add services to the container.
@@ -92,8 +90,6 @@ try
 		options.AddBasePolicy(builder => builder.Expire(TimeSpan.FromSeconds(60))); // Example policy
 	});
 
-	// Services Initiated
-	//builder.Services.AddScoped<IHTTPHelper, HTTPHelper>();
 	builder.Services.AddScoped<Func<string, IHTTPHelper>>(sp => baseAddress =>
 	{
 		var factory = sp.GetRequiredService<IHttpClientFactory>();
@@ -124,8 +120,6 @@ try
 }
 catch (Exception ex)
 {
-    //logger.Error(ex, "Stopped program because of exception");
-
     ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, "Stopped program because of exception", ActionType.View.ToString(), "", "User", "machine name", "", ex.Message, 0, ex);
 
     throw;
