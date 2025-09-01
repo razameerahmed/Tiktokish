@@ -1,4 +1,5 @@
 ﻿using APIGateway;
+using Azure.Core;
 using Common;
 using Common.Implementation;
 using Common.Interface;
@@ -8,11 +9,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
+using System.Configuration;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Text;
-using UserService.Controllers;
+using UserService;
+using UserService.Interface;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -23,19 +26,20 @@ public class AuthController : ControllerBase
     private readonly IDistributedCache _cache;
 	private readonly TimeSpan _cacheExpiry = TimeSpan.FromMinutes(5);
 	private readonly IHTTPHelper _httpHelper;
-	private readonly IHTTPHelper _httpAuthHelper;
+	//private readonly IHTTPHelper _httpAuthHelper;
 	private readonly IHttpContextAccessor _httpContextAccessor;
 	private readonly HttpClient _httpClient;
+	private readonly IConfiguration _configuration;
 
-	public AuthController(IHttpClientFactory httpClientFactory, IDistributedCache cache, Func<string, IHTTPHelper> httpHelperFactory, IHttpContextAccessor httpContextAccessor, HttpClient httpClient)
+	public AuthController(IHttpClientFactory httpClientFactory, IDistributedCache cache, Func<string, IHTTPHelper> httpHelperFactory, IHttpContextAccessor httpContextAccessor, HttpClient httpClient, IConfiguration configuration)
 	{
 		_httpClientFactory = httpClientFactory;
         _cache = cache;
 		_httpHelper = httpHelperFactory("https://localhost:44323");
-		_httpAuthHelper = httpHelperFactory("https://localhost:44333");
+		//_httpAuthHelper = httpHelperFactory("https://localhost:44333");
 		_httpContextAccessor = httpContextAccessor;
 		_httpClient = httpClient;
-
+		_configuration = configuration;
 	}
 
 	[HttpPost("logincache")]
@@ -88,28 +92,68 @@ public class AuthController : ControllerBase
 	[HttpPost("login")]
 	public async Task<IActionResult> Login([FromBody] APIGateway.UserLogin user)
 	{
-		var correlationId = _httpContextAccessor.HttpContext.Request.Headers["X-Correlation-ID"].ToString();
+		var userServiceUrl =_configuration["Services:UserService"]; // e.g. "https://localhost:5002"
 
-		_httpClient.DefaultRequestHeaders.Add("X-Correlation-ID", correlationId);
 
-		var client = _httpClientFactory.CreateClient("UserService");
-
-		var response = await client.GetAsync("WeatherForecast");
-
-		if (!response.IsSuccessStatusCode)
+		//var response = await _httpClient.PostAsJsonAsync($"{userServiceUrl}/UserService/ValidateLogin", "");
+		//var response = await _httpClient.PostAsJsonAsync("UserService/ValidateLogin", "");
+		try
 		{
-			var errorText = await response.Content.ReadAsStringAsync();
-			return StatusCode((int)response.StatusCode, new
+			var correlationId = HttpContext.Request.Headers["X-Correlation-ID"].ToString();
+			var request= new LoginRequest
 			{
-				ok = false,
-				from = "Gateway",
-				downstreamStatus = response.StatusCode,
-				downstreamBody = errorText
-			});
+				Identifier = user.Username,
+				Password = user.Password,
+				correlationId= correlationId
+			};
+			var response = await _httpHelper.PostJsonAsync("/userservice/validatelogin", request);
+
+			//if (!response)
+			//{
+			//	var error = await response..Content.ReadAsStringAsync();
+			//	return StatusCode((int)response.StatusCode, error);
+			//}
+			//var loginResponse = await response.Content.ReadFromJsonAsync<LoginResponse>();
+			//return Ok(loginResponse);
+
+			var responsely = System.Text.Json.JsonSerializer.Serialize(response);
+
+			return Ok(
+				 new LoginResponse
+				 {
+					 Username = user.Username
+				});
+
+		}
+		catch (Exception ex)
+		{
+			return BadRequest("Message"+ ex);
 		}
 
-		var json = await response.Content.ReadAsStringAsync();
-		return Content(json, "application/json");
+		
+
+		//var correlationId = _httpContextAccessor.HttpContext.Request.Headers["X-Correlation-ID"].ToString();
+
+		//_httpClient.DefaultRequestHeaders.Add("X-Correlation-ID", correlationId);
+
+		//var client = _httpClientFactory.CreateClient("UserService");
+
+		//var response = await client.GetAsync("UserService/Login");
+
+		//if (!response.IsSuccessStatusCode)
+		//{
+		//	var errorText = await response.Content.ReadAsStringAsync();
+		//	return StatusCode((int)response.StatusCode, new
+		//	{
+		//		ok = false,
+		//		from = "Gateway",
+		//		downstreamStatus = response.StatusCode,
+		//		downstreamBody = errorText
+		//	});
+		//}
+
+		//var json = await response.Content.ReadAsStringAsync();
+		//return Content(json, "application/json");
 
 		//if (user.Username == "admin" && user.Password == "password123456")
 		//{
@@ -119,24 +163,24 @@ public class AuthController : ControllerBase
 		//return Unauthorized();
 	}
 
-	private string GenerateJwtToken(string username)
-	{
-		var claims = new[]
-		{
-			new Claim(JwtRegisteredClaimNames.Sub, username),
-			new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-		};
+	//private string GenerateJwtToken(string username)
+	//{
+	//	var claims = new[]
+	//	{
+	//		new Claim(JwtRegisteredClaimNames.Sub, username),
+	//		new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+	//	};
 
-		var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("your_super_secret_key_1111111111"));
-		var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+	//	var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("your_super_secret_key_1111111111"));
+	//	var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-		var token = new JwtSecurityToken(
-			issuer: "yourdomain.com",
-			audience: "yourdomain.com",
-			claims: claims,
-			expires: DateTime.Now.AddMinutes(30),
-			signingCredentials: creds);
+	//	var token = new JwtSecurityToken(
+	//		issuer: "yourdomain.com",
+	//		audience: "yourdomain.com",
+	//		claims: claims,
+	//		expires: DateTime.Now.AddMinutes(30),
+	//		signingCredentials: creds);
 
-		return new JwtSecurityTokenHandler().WriteToken(token);
-	}
+	//	return new JwtSecurityTokenHandler().WriteToken(token);
+	//}
 }

@@ -489,3 +489,22 @@ D:\Live Work\Tiktok China\MicroServices\UserService\bin\Debug\net8.0\Microsoft.E
 D:\Live Work\Tiktok China\MicroServices\UserService\bin\Debug\net8.0\System.Diagnostics.DiagnosticSource.dll
 D:\Live Work\Tiktok China\MicroServices\UserService\bin\Debug\net8.0\Common.dll
 D:\Live Work\Tiktok China\MicroServices\UserService\bin\Debug\net8.0\Common.pdb
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\MicroServices\UserService\bin\Debug\net8.0\Common.deps.json
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\MicroServices\UserService\bin\Debug\net8.0\Common.runtimeconfig.json
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\MicroServices\UserService\bin\Debug\net8.0\Common.exe
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\MicroServices\UserService\bin\Debug\net8.0\Microsoft.Extensions.Configuration.dll
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\MicroServices\UserService\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\MicroServices\UserService\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Binder.dll
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\MicroServices\UserService\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.dll
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\MicroServices\UserService\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.Abstractions.dll
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\MicroServices\UserService\bin\Debug\net8.0\Microsoft.Extensions.Http.dll
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\MicroServices\UserService\bin\Debug\net8.0\Microsoft.Extensions.Options.ConfigurationExtensions.dll
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\MicroServices\UserService\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\MicroServices\UserService\bin\Debug\net8.0\System.Diagnostics.DiagnosticSource.dll
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\MicroServices\UserService\bin\Debug\net8.0\Common.dll
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\MicroServices\UserService\bin\Debug\net8.0\Common.pdb
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\MicroServices\UserService\bin\Debug\net8.0\Extension.Security.deps.json
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\MicroServices\UserService\bin\Debug\net8.0\Extension.Security.runtimeconfig.json
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\MicroServices\UserService\bin\Debug\net8.0\Extension.Security.exe
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\MicroServices\UserService\bin\Debug\net8.0\Extension.Security.dll
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\MicroServices\UserService\bin\Debug\net8.0\Extension.Security.pdb

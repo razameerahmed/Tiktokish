@@ -49,7 +49,6 @@ D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\CommonLib\Common\b
 D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\CommonLib\Common\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
 D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\CommonLib\Common\bin\Debug\net8.0\System.Diagnostics.DiagnosticSource.dll
 D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\CommonLib\Common\bin\Debug\net8.0\NLog.Web.AspNetCore.dll
-D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\CommonLib\Common\bin\Debug\net8.0\NLog.Web.AspNetCore.xml
 D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\CommonLib\Common\obj\Debug\net8.0\Common.csproj.AssemblyReference.cache
 D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\CommonLib\Common\obj\Debug\net8.0\Common.GeneratedMSBuildEditorConfig.editorconfig
 D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\CommonLib\Common\obj\Debug\net8.0\Common.AssemblyInfoInputs.cache
@@ -96,3 +95,5 @@ D:\Live Work\Tiktok China\CommonLib\Common\obj\Debug\net8.0\ref\Common.dll
 D:\Live Work\Tiktok China\CommonLib\Common\bin\Debug\net8.0\NLog.dll
 D:\Live Work\Tiktok China\CommonLib\Common\bin\Debug\net8.0\NLog.Extensions.Logging.dll
 D:\Live Work\Tiktok China\CommonLib\Common\bin\Debug\net8.0\NLog.Web.AspNetCore.dll
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\CommonLib\Common\bin\Debug\net8.0\NLog.dll
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\CommonLib\Common\bin\Debug\net8.0\NLog.Extensions.Logging.dll

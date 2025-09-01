@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\CommonLib\Common\Common.csproj" />
     <ProjectReference Include="..\..\Database\DataAccessLayer\DataAccessLayer.csproj" />
   </ItemGroup>
 

@@ -208,3 +208,17 @@ D:\Live Work\Tiktok China\BusinessLogic\Extension.Security\obj\Debug\net8.0\refi
 D:\Live Work\Tiktok China\BusinessLogic\Extension.Security\obj\Debug\net8.0\Extension.Security.pdb
 D:\Live Work\Tiktok China\BusinessLogic\Extension.Security\obj\Debug\net8.0\Extension.Security.genruntimeconfig.cache
 D:\Live Work\Tiktok China\BusinessLogic\Extension.Security\obj\Debug\net8.0\ref\Extension.Security.dll
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\BusinessLogic\Extension.Security\bin\Debug\net8.0\Common.deps.json
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\BusinessLogic\Extension.Security\bin\Debug\net8.0\Common.runtimeconfig.json
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\BusinessLogic\Extension.Security\bin\Debug\net8.0\Common.exe
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\BusinessLogic\Extension.Security\bin\Debug\net8.0\Microsoft.Extensions.Configuration.dll
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\BusinessLogic\Extension.Security\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\BusinessLogic\Extension.Security\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Binder.dll
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\BusinessLogic\Extension.Security\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.dll
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\BusinessLogic\Extension.Security\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.Abstractions.dll
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\BusinessLogic\Extension.Security\bin\Debug\net8.0\Microsoft.Extensions.Http.dll
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\BusinessLogic\Extension.Security\bin\Debug\net8.0\Microsoft.Extensions.Options.ConfigurationExtensions.dll
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\BusinessLogic\Extension.Security\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\BusinessLogic\Extension.Security\bin\Debug\net8.0\System.Diagnostics.DiagnosticSource.dll
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\BusinessLogic\Extension.Security\bin\Debug\net8.0\Common.dll
+D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\BusinessLogic\Extension.Security\bin\Debug\net8.0\Common.pdb

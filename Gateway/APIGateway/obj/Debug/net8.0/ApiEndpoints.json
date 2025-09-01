@@ -53,12 +53,18 @@
   },
   {
     "ContainingType": "UserService.Controllers.UserServiceController",
-    "Method": "TestConnection",
-    "RelativePath": "UserService",
-    "HttpMethod": "GET",
+    "Method": "ValidateLogin",
+    "RelativePath": "UserService/validatelogin",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "UserService.Interface.LoginRequest",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   }
 ]

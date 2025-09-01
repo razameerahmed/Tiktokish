@@ -1509,6 +1509,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
+          "Common": "1.0.0",
           "DataAccessLayer": "1.0.0",
           "NLog.Web.AspNetCore": "6.0.3"
         },
@@ -1527,6 +1528,7 @@
           "DataAccess": "1.0.0",
           "DataAccessLayer": "1.0.0",
           "EntityFramework": "6.5.1",
+          "Extension.Security": "1.0.0",
           "Microsoft.EntityFrameworkCore": "8.0.19",
           "Microsoft.EntityFrameworkCore.SqlServer": "8.0.19",
           "NLog.Web.AspNetCore": "6.0.3"
@@ -4212,30 +4214,31 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Remi\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\razameer.ahmed\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Live Work\\Tiktok China\\Gateway\\APIGateway\\APIGateway.csproj",
+      "projectUniqueName": "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\Gateway\\APIGateway\\APIGateway.csproj",
       "projectName": "APIGateway",
-      "projectPath": "D:\\Live Work\\Tiktok China\\Gateway\\APIGateway\\APIGateway.csproj",
-      "packagesPath": "C:\\Users\\Remi\\.nuget\\packages\\",
-      "outputPath": "D:\\Live Work\\Tiktok China\\Gateway\\APIGateway\\obj\\",
+      "projectPath": "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\Gateway\\APIGateway\\APIGateway.csproj",
+      "packagesPath": "C:\\Users\\razameer.ahmed\\.nuget\\packages\\",
+      "outputPath": "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\Gateway\\APIGateway\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Remi\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\razameer.ahmed\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.1.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\DevExpress 20.1\\Components\\System\\Components\\Packages": {},
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
@@ -4244,14 +4247,14 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\Live Work\\Tiktok China\\BusinessLogic\\Extension.Security\\Extension.Security.csproj": {
-              "projectPath": "D:\\Live Work\\Tiktok China\\BusinessLogic\\Extension.Security\\Extension.Security.csproj"
+            "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\BusinessLogic\\Extension.Security\\Extension.Security.csproj": {
+              "projectPath": "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\BusinessLogic\\Extension.Security\\Extension.Security.csproj"
             },
-            "D:\\Live Work\\Tiktok China\\CommonLib\\Common\\Common.csproj": {
-              "projectPath": "D:\\Live Work\\Tiktok China\\CommonLib\\Common\\Common.csproj"
+            "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\CommonLib\\Common\\Common.csproj": {
+              "projectPath": "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\CommonLib\\Common\\Common.csproj"
             },
-            "D:\\Live Work\\Tiktok China\\MicroServices\\UserService\\UserService.csproj": {
-              "projectPath": "D:\\Live Work\\Tiktok China\\MicroServices\\UserService\\UserService.csproj"
+            "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\MicroServices\\UserService\\UserService.csproj": {
+              "projectPath": "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\MicroServices\\UserService\\UserService.csproj"
             }
           }
         }
@@ -4265,8 +4268,7 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      },
-      "SdkAnalysisLevel": "9.0.300"
+      }
     },
     "frameworks": {
       "net8.0": {
@@ -4316,7 +4318,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.413/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

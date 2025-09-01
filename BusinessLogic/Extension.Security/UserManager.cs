@@ -17,7 +17,7 @@ namespace Extension.Security
 				var users = context.UserInfos.ToList();
 				foreach (var user in users)
 				{
-					Console.WriteLine($"{user.Id} - {user.UserName}");
+					Console.WriteLine($"{user.Id} - {user.Username}");
 				}
 			}
 
