@@ -1,4 +1,4 @@
-namespace APIGateway
+namespace Common.Model
 {
 	public class UserLogin
 	{

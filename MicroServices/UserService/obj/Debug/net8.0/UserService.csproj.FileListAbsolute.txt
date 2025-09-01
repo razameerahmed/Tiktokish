@@ -508,3 +508,25 @@ D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\MicroServices\User
 D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\MicroServices\UserService\bin\Debug\net8.0\Extension.Security.exe
 D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\MicroServices\UserService\bin\Debug\net8.0\Extension.Security.dll
 D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\MicroServices\UserService\bin\Debug\net8.0\Extension.Security.pdb
+D:\Personal\Tiktokish\Code\MicroServices\UserService\bin\Debug\net8.0\Extension.Security.deps.json
+D:\Personal\Tiktokish\Code\MicroServices\UserService\bin\Debug\net8.0\Extension.Security.runtimeconfig.json
+D:\Personal\Tiktokish\Code\MicroServices\UserService\bin\Debug\net8.0\Common.deps.json
+D:\Personal\Tiktokish\Code\MicroServices\UserService\bin\Debug\net8.0\Common.runtimeconfig.json
+D:\Personal\Tiktokish\Code\MicroServices\UserService\bin\Debug\net8.0\Common.exe
+D:\Personal\Tiktokish\Code\MicroServices\UserService\bin\Debug\net8.0\Extension.Security.exe
+D:\Personal\Tiktokish\Code\MicroServices\UserService\bin\Debug\net8.0\Microsoft.Extensions.Configuration.dll
+D:\Personal\Tiktokish\Code\MicroServices\UserService\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\Personal\Tiktokish\Code\MicroServices\UserService\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Binder.dll
+D:\Personal\Tiktokish\Code\MicroServices\UserService\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.dll
+D:\Personal\Tiktokish\Code\MicroServices\UserService\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.Abstractions.dll
+D:\Personal\Tiktokish\Code\MicroServices\UserService\bin\Debug\net8.0\Microsoft.Extensions.Http.dll
+D:\Personal\Tiktokish\Code\MicroServices\UserService\bin\Debug\net8.0\Microsoft.Extensions.Options.ConfigurationExtensions.dll
+D:\Personal\Tiktokish\Code\MicroServices\UserService\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
+D:\Personal\Tiktokish\Code\MicroServices\UserService\bin\Debug\net8.0\NLog.dll
+D:\Personal\Tiktokish\Code\MicroServices\UserService\bin\Debug\net8.0\NLog.Extensions.Logging.dll
+D:\Personal\Tiktokish\Code\MicroServices\UserService\bin\Debug\net8.0\NLog.Web.AspNetCore.dll
+D:\Personal\Tiktokish\Code\MicroServices\UserService\bin\Debug\net8.0\System.Diagnostics.DiagnosticSource.dll
+D:\Personal\Tiktokish\Code\MicroServices\UserService\bin\Debug\net8.0\Common.dll
+D:\Personal\Tiktokish\Code\MicroServices\UserService\bin\Debug\net8.0\Extension.Security.dll
+D:\Personal\Tiktokish\Code\MicroServices\UserService\bin\Debug\net8.0\Extension.Security.pdb
+D:\Personal\Tiktokish\Code\MicroServices\UserService\bin\Debug\net8.0\Common.pdb

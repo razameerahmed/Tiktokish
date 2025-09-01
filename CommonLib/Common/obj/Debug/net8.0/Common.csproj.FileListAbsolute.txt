@@ -97,3 +97,6 @@ D:\Live Work\Tiktok China\CommonLib\Common\bin\Debug\net8.0\NLog.Extensions.Logg
 D:\Live Work\Tiktok China\CommonLib\Common\bin\Debug\net8.0\NLog.Web.AspNetCore.dll
 D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\CommonLib\Common\bin\Debug\net8.0\NLog.dll
 D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\CommonLib\Common\bin\Debug\net8.0\NLog.Extensions.Logging.dll
+D:\Personal\Tiktokish\Code\CommonLib\Common\bin\Debug\net8.0\NLog.dll
+D:\Personal\Tiktokish\Code\CommonLib\Common\bin\Debug\net8.0\NLog.Extensions.Logging.dll
+D:\Personal\Tiktokish\Code\CommonLib\Common\bin\Debug\net8.0\NLog.Web.AspNetCore.dll

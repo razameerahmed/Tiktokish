@@ -1,17 +1,20 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using Microsoft.Extensions.Logging;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using DataAccess;
-using System.Configuration;
-using NLog;
-using NLog.Web;
-using Common.Implementation;
+﻿using Common.Implementation;
 using Common.Interface;
+using Common.Model;
+using DataAccess;
 using DataAccessLayer.Models;
 using Extension.Security.Implementation;
+using Extension.Security.Interface;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using NLog;
+using NLog.Web;
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Linq;
+using System.Threading.Tasks;
 
 
 namespace UserService.Controllers
@@ -20,7 +23,18 @@ namespace UserService.Controllers
     [Route("[controller]")]
     public class UserServiceController : ControllerBase
     {
+		private IUserManager _userManager;
 
+		public UserServiceController(IUserManager userManager) {
+			_userManager = userManager;
+		}
+
+		[HttpGet]
+		public IActionResult Index()
+		{
+			var request = Request;
+			return Ok("User Service is running");
+		}
 		//private readonly TiktokishContext _context;
 
 		//public UserServiceController(TiktokishContext context)
@@ -29,13 +43,13 @@ namespace UserService.Controllers
 		//}
 
 		//[HttpGet]
-  //      public IActionResult TestConnection()
+		//      public IActionResult TestConnection()
 		//{
 		//	var correlationId = HttpContext.Request.Headers["X-Correlation-ID"].ToString();
 
-  //         ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), correlationId, "User", "machine name", this.GetType().Name, "User account created", 1);
-  
-			//          return Ok(new { Message = "Hello from UserService!", CorrelationId = correlationId });
+		//         ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), correlationId, "User", "machine name", this.GetType().Name, "User account created", 1);
+
+		//          return Ok(new { Message = "Hello from UserService!", CorrelationId = correlationId });
 
 		//	//return Ok(new
 		//	//{
@@ -52,11 +66,11 @@ namespace UserService.Controllers
 		{
 			//ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), correlationId, "User", "machine name", this.GetType().Name, "User account created", 1);
 
-			if (string.IsNullOrWhiteSpace(request.Identifier) || string.IsNullOrWhiteSpace(request.Password))
-				return BadRequest("Username/Email/Phone and Password are required");
+			//if (string.IsNullOrWhiteSpace(request.Identifier) || string.IsNullOrWhiteSpace(request.Password))
+			//	return BadRequest("Username/Email/Phone and Password are required");
 
-			//var res = UserManager.ValidateLogin(request);
-
+			var res = _userManager.ValidateLogin(request);
+			return Ok(res);
 			//var user = _context.UserInfos
 			//	.FirstOrDefault(u =>
 			//		u.Username == request.Identifier ||
@@ -84,11 +98,11 @@ namespace UserService.Controllers
 			//	IsVerified = user.IsVerified
 			//});
 
-			return Ok(new LoginResponse
-			{
-				IsVerified = true,
-				Username = "UserService",
-				Token = ""			});
+			//return Ok(new LoginResponse
+			//{
+			//	IsVerified = true,
+			//	Username = "UserService",
+			//	Token = ""			});
 		}
 
 	}

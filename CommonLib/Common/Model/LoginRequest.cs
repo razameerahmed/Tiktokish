@@ -1,4 +1,5 @@
-﻿namespace Common.Interface
+﻿namespace Common.Model
+
 {
     public class LoginRequest
     {

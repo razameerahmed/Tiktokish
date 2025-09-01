@@ -12,6 +12,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 using Common.Interface;
+using Common.Model;
 
 namespace Extension.Security.Implementation
 {
@@ -43,7 +44,7 @@ namespace Extension.Security.Implementation
 
 
 			var res = new LoginResponse
-			{ Token = request.Token };
+			{ Token = request.Token, Username= "Response from Extension" };
 			return res;
 
 

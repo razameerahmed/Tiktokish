@@ -21,3 +21,13 @@ D:\Live Work\Tiktok China\MicroServices\UserService\obj\Debug\net8.0\staticwebas
 D:\Live Work\Tiktok China\MicroServices\UserService\obj\Debug\net8.0\staticwebassets.build.json
 D:\Live Work\Tiktok China\MicroServices\UserService\obj\Debug\net8.0\staticwebassets.build.json
 D:\Live Work\Tiktok China\MicroServices\UserService\obj\Debug\net8.0\staticwebassets.build.json
+D:\Personal\Tiktokish\Code\MicroServices\UserService\obj\Debug\net8.0\staticwebassets.build.json
+D:\Personal\Tiktokish\Code\MicroServices\UserService\obj\Debug\net8.0\staticwebassets.build.json
+D:\Personal\Tiktokish\Code\MicroServices\UserService\obj\Debug\net8.0\staticwebassets.build.json
+D:\Personal\Tiktokish\Code\MicroServices\UserService\obj\Debug\net8.0\staticwebassets.build.json
+D:\Personal\Tiktokish\Code\MicroServices\UserService\obj\Debug\net8.0\staticwebassets.build.json
+D:\Personal\Tiktokish\Code\MicroServices\UserService\obj\Debug\net8.0\staticwebassets.build.json
+D:\Personal\Tiktokish\Code\MicroServices\UserService\obj\Debug\net8.0\staticwebassets.build.json
+D:\Personal\Tiktokish\Code\MicroServices\UserService\obj\Debug\net8.0\staticwebassets.build.json
+D:\Personal\Tiktokish\Code\MicroServices\UserService\obj\Debug\net8.0\staticwebassets.build.json
+D:\Personal\Tiktokish\Code\MicroServices\UserService\obj\Debug\net8.0\staticwebassets.build.json

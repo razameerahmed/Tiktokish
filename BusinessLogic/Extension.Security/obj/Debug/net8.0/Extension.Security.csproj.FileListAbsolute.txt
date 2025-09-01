@@ -222,3 +222,17 @@ D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\BusinessLogic\Exte
 D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\BusinessLogic\Extension.Security\bin\Debug\net8.0\System.Diagnostics.DiagnosticSource.dll
 D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\BusinessLogic\Extension.Security\bin\Debug\net8.0\Common.dll
 D:\Razameer\Live work 2\TikTok China Saad\Tiktokish\Tiktokish\BusinessLogic\Extension.Security\bin\Debug\net8.0\Common.pdb
+D:\Personal\Tiktokish\Code\BusinessLogic\Extension.Security\bin\Debug\net8.0\Common.deps.json
+D:\Personal\Tiktokish\Code\BusinessLogic\Extension.Security\bin\Debug\net8.0\Common.runtimeconfig.json
+D:\Personal\Tiktokish\Code\BusinessLogic\Extension.Security\bin\Debug\net8.0\Common.exe
+D:\Personal\Tiktokish\Code\BusinessLogic\Extension.Security\bin\Debug\net8.0\Microsoft.Extensions.Configuration.dll
+D:\Personal\Tiktokish\Code\BusinessLogic\Extension.Security\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\Personal\Tiktokish\Code\BusinessLogic\Extension.Security\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Binder.dll
+D:\Personal\Tiktokish\Code\BusinessLogic\Extension.Security\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.dll
+D:\Personal\Tiktokish\Code\BusinessLogic\Extension.Security\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.Abstractions.dll
+D:\Personal\Tiktokish\Code\BusinessLogic\Extension.Security\bin\Debug\net8.0\Microsoft.Extensions.Http.dll
+D:\Personal\Tiktokish\Code\BusinessLogic\Extension.Security\bin\Debug\net8.0\Microsoft.Extensions.Options.ConfigurationExtensions.dll
+D:\Personal\Tiktokish\Code\BusinessLogic\Extension.Security\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
+D:\Personal\Tiktokish\Code\BusinessLogic\Extension.Security\bin\Debug\net8.0\System.Diagnostics.DiagnosticSource.dll
+D:\Personal\Tiktokish\Code\BusinessLogic\Extension.Security\bin\Debug\net8.0\Common.dll
+D:\Personal\Tiktokish\Code\BusinessLogic\Extension.Security\bin\Debug\net8.0\Common.pdb

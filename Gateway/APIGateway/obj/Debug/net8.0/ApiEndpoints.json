@@ -9,7 +9,7 @@
     "Parameters": [
       {
         "Name": "user",
-        "Type": "APIGateway.UserLogin",
+        "Type": "Common.Model.UserLogin",
         "IsRequired": true
       }
     ],
@@ -25,26 +25,26 @@
     "Parameters": [
       {
         "Name": "user",
-        "Type": "APIGateway.UserLogin",
+        "Type": "Common.Model.UserLogin",
         "IsRequired": true
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "APIGateway.UserLogin",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
     "ContainingType": "APIGateway.Controllers.HomeController",
     "Method": "GetValues",
     "RelativePath": "api/Home",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UserService.Controllers.UserServiceController",
+    "Method": "Index",
+    "RelativePath": "UserService",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -61,7 +61,7 @@
     "Parameters": [
       {
         "Name": "request",
-        "Type": "UserService.Interface.LoginRequest",
+        "Type": "Common.Model.LoginRequest",
         "IsRequired": true
       }
     ],

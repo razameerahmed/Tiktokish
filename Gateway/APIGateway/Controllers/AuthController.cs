@@ -3,6 +3,7 @@ using Azure.Core;
 using Common;
 using Common.Implementation;
 using Common.Interface;
+using Common.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -15,7 +16,6 @@ using System.Net.Http;
 using System.Security.Claims;
 using System.Text;
 using UserService;
-using UserService.Interface;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -43,7 +43,7 @@ public class AuthController : ControllerBase
 	}
 
 	[HttpPost("logincache")]
-    public async Task<UserLogin> LoginFromCache([FromBody] APIGateway.UserLogin user)
+    public async Task<IActionResult> LoginFromCache([FromBody] UserLogin user)
     {
         string cacheKey = "";
         string correlationId = new Guid().ToString();
@@ -61,7 +61,7 @@ public class AuthController : ControllerBase
             if (cachedItem != null)
             {
                 Console.WriteLine("✅ Item retrieved from cache!");
-                return JsonConvert.DeserializeObject<UserLogin>(cachedItem);
+                return Ok(cachedItem);
             }
         }
         catch (Exception ex)
@@ -80,7 +80,7 @@ public class AuthController : ControllerBase
             new DistributedCacheEntryOptions { AbsoluteExpirationRelativeToNow = _cacheExpiry }
         );
 
-        return item;
+        return Ok(item);
     }
 
 	private Task<UserLogin> FetchItemFromDatabase(string userName)
@@ -90,7 +90,7 @@ public class AuthController : ControllerBase
 	}
 
 	[HttpPost("login")]
-	public async Task<IActionResult> Login([FromBody] APIGateway.UserLogin user)
+	public async Task<IActionResult> Login([FromBody] UserLogin user)
 	{
 		var userServiceUrl =_configuration["Services:UserService"]; // e.g. "https://localhost:5002"
 
@@ -116,13 +116,9 @@ public class AuthController : ControllerBase
 			//var loginResponse = await response.Content.ReadFromJsonAsync<LoginResponse>();
 			//return Ok(loginResponse);
 
-			var responsely = System.Text.Json.JsonSerializer.Serialize(response);
 
 			return Ok(
-				 new LoginResponse
-				 {
-					 Username = user.Username
-				});
+				 response);
 
 		}
 		catch (Exception ex)
