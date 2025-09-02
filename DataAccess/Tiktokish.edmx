@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TiktokishModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TiktokishModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Tiktokish.dbo.UserInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="UserInfo">
@@ -18,7 +18,30 @@ warning 6002: The table/view 'Tiktokish.dbo.UserInfo' does not have a primary ke
           <Property Name="Email" Type="nvarchar" MaxLength="500" />
           <Property Name="IsActive" Type="bit" />
         </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="RealName" Type="nvarchar" MaxLength="100" />
+          <Property Name="PasswordHash" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="AvatarUrl" Type="nvarchar" MaxLength="500" />
+          <Property Name="Bio" Type="nvarchar" MaxLength="400" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="UpdatedAt" Type="datetime2" Precision="7" />
+          <Property Name="IsVerified" Type="bit" Nullable="false" />
+          <Property Name="Role" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastLoginAt" Type="datetime2" Precision="7" />
+          <Property Name="Locale" Type="nvarchar" MaxLength="10" />
+          <Property Name="DevicePreference" Type="nvarchar" MaxLength="100" />
+          <Property Name="EcomStatus" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityContainer Name="TiktokishModelStoreContainer">
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserInfo" EntityType="Self.UserInfo" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [UserInfo].[Id] AS [Id], 
@@ -30,8 +53,7 @@ warning 6002: The table/view 'Tiktokish.dbo.UserInfo' does not have a primary ke
     FROM [dbo].[UserInfo] AS [UserInfo]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TiktokishModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -48,7 +70,30 @@ warning 6002: The table/view 'Tiktokish.dbo.UserInfo' does not have a primary ke
         </EntityType>
         <EntityContainer Name="TiktokishEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="UserInfoes" EntityType="Self.UserInfo" />
+          <EntitySet Name="Users" EntityType="TiktokishModel.Users" />
         </EntityContainer>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="RealName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordHash" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="AvatarUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Bio" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="7" />
+          <Property Name="IsVerified" Type="Boolean" Nullable="false" />
+          <Property Name="Role" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastLoginAt" Type="DateTime" Precision="7" />
+          <Property Name="Locale" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="DevicePreference" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="EcomStatus" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -67,6 +112,29 @@ warning 6002: The table/view 'Tiktokish.dbo.UserInfo' does not have a primary ke
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="TiktokishModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="EcomStatus" ColumnName="EcomStatus" />
+                <ScalarProperty Name="DevicePreference" ColumnName="DevicePreference" />
+                <ScalarProperty Name="Locale" ColumnName="Locale" />
+                <ScalarProperty Name="LastLoginAt" ColumnName="LastLoginAt" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="IsVerified" ColumnName="IsVerified" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Bio" ColumnName="Bio" />
+                <ScalarProperty Name="AvatarUrl" ColumnName="AvatarUrl" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="RealName" ColumnName="RealName" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -81,7 +149,7 @@ warning 6002: The table/view 'Tiktokish.dbo.UserInfo' does not have a primary ke
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

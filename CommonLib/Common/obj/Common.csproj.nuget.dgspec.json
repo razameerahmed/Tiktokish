@@ -1,31 +1,33 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Personal\\Tiktokish\\Code\\CommonLib\\Common\\Common.csproj": {}
+    "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\CommonLib\\Common\\Common.csproj": {}
   },
   "projects": {
-    "D:\\Personal\\Tiktokish\\Code\\CommonLib\\Common\\Common.csproj": {
+    "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\CommonLib\\Common\\Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Personal\\Tiktokish\\Code\\CommonLib\\Common\\Common.csproj",
+        "projectUniqueName": "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\CommonLib\\Common\\Common.csproj",
         "projectName": "Common",
-        "projectPath": "D:\\Personal\\Tiktokish\\Code\\CommonLib\\Common\\Common.csproj",
-        "packagesPath": "C:\\Users\\khalid.halim\\.nuget\\packages\\",
-        "outputPath": "D:\\Personal\\Tiktokish\\Code\\CommonLib\\Common\\obj\\",
+        "projectPath": "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\CommonLib\\Common\\Common.csproj",
+        "packagesPath": "C:\\Users\\razameer.ahmed\\.nuget\\packages\\",
+        "outputPath": "D:\\Razameer\\Live work 2\\TikTok China Saad\\Tiktokish\\Tiktokish\\CommonLib\\Common\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\khalid.halim\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\razameer.ahmed\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.1.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\DevExpress 20.1\\Components\\System\\Components\\Packages": {},
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -43,8 +45,7 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.300"
+        }
       },
       "frameworks": {
         "net8.0": {
@@ -75,7 +76,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.413/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

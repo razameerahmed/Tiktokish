@@ -64,46 +64,43 @@ namespace UserService.Controllers
 		[HttpPost("validatelogin")]
 		public IActionResult ValidateLogin([FromBody] LoginRequest request)
 		{
-			//ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), correlationId, "User", "machine name", this.GetType().Name, "User account created", 1);
+			try
+			{
+				ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), request.correlationId, request.Identifier, "machine name", this.GetType().Name, "User Login", 1);
 
-			//if (string.IsNullOrWhiteSpace(request.Identifier) || string.IsNullOrWhiteSpace(request.Password))
-			//	return BadRequest("Username/Email/Phone and Password are required");
+				if (string.IsNullOrWhiteSpace(request.Identifier) || string.IsNullOrWhiteSpace(request.Password))
+					return BadRequest("Username/Email/Phone and Password are required");
 
-			var res = _userManager.ValidateLogin(request);
-			return Ok(res);
-			//var user = _context.UserInfos
-			//	.FirstOrDefault(u =>
-			//		u.Username == request.Identifier ||
-			//		u.Email == request.Identifier ||
-			//		u.PhoneNumber == request.Identifier);
-
-			//if (user == null || !user.IsActive)
-			//	return Unauthorized("Invalid login credentials");
-
-			//bool passwordValid = true;// BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash);
-			//if (!passwordValid)
-			//	return Unauthorized("Invalid login credentials");
-
-			////string token = GenerateJwtToken(user);
-
-			//user.LastLoginAt = DateTime.UtcNow;
-			//_context.SaveChanges();
-
-			//return Ok(new LoginResponse
-			//{
-			//	//Token = token,
-			//	Username = user.Username,
-			//	AvatarUrl = user.AvatarUrl,
-			//	Role = user.Role,
-			//	IsVerified = user.IsVerified
-			//});
-
-			//return Ok(new LoginResponse
-			//{
-			//	IsVerified = true,
-			//	Username = "UserService",
-			//	Token = ""			});
+				ResponseModel<LoginResponse> response = new ResponseModel<LoginResponse>();
+				var res = _userManager.ValidateLogin(request, response);
+				return Ok(res);
+			}
+			catch (Exception ex)
+			{
+				ActivityLogger.Instance.SystemLog(NLog.LogLevel.Error, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), request.correlationId, request.Identifier, "machine name", this.GetType().Name, ex.Message, 0,ex);
+				return BadRequest(ex.Message);
+			}
 		}
 
+		[HttpPost("createuseraccount")]
+		public IActionResult CreateUserAccount([FromBody] LoginRequest request)
+		{
+			try
+			{
+				ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), request.correlationId, request.Identifier, "machine name", this.GetType().Name, "User Login", 1);
+
+				if (string.IsNullOrWhiteSpace(request.Identifier) || string.IsNullOrWhiteSpace(request.Password))
+					return BadRequest("Username/Email/Phone and Password are required");
+
+				ResponseModel<LoginResponse> response = new ResponseModel<LoginResponse>();
+				var res = _userManager.AddUser(request, response);
+				return Ok(res);
+			}
+			catch (Exception ex)
+			{
+				ActivityLogger.Instance.SystemLog(NLog.LogLevel.Error, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), request.correlationId, request.Identifier, "machine name", this.GetType().Name, ex.Message, 0, ex);
+				return BadRequest(ex.Message);
+			}
+		}
 	}
 }

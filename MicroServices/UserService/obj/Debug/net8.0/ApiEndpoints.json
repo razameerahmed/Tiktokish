@@ -11,6 +11,22 @@
   },
   {
     "ContainingType": "UserService.Controllers.UserServiceController",
+    "Method": "CreateUserAccount",
+    "RelativePath": "UserService/createuseraccount",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Common.Model.LoginRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UserService.Controllers.UserServiceController",
     "Method": "ValidateLogin",
     "RelativePath": "UserService/validatelogin",
     "HttpMethod": "POST",

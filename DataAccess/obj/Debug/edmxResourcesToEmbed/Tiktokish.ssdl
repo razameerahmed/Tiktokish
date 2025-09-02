@@ -13,7 +13,30 @@ warning 6002: The table/view 'Tiktokish.dbo.UserInfo' does not have a primary ke
     <Property Name="Email" Type="nvarchar" MaxLength="500" />
     <Property Name="IsActive" Type="bit" />
   </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="100" />
+    <Property Name="PhoneNumber" Type="nvarchar" MaxLength="20" />
+    <Property Name="RealName" Type="nvarchar" MaxLength="100" />
+    <Property Name="PasswordHash" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="AvatarUrl" Type="nvarchar" MaxLength="500" />
+    <Property Name="Bio" Type="nvarchar" MaxLength="400" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="UpdatedAt" Type="datetime2" Precision="7" />
+    <Property Name="IsVerified" Type="bit" Nullable="false" />
+    <Property Name="Role" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastLoginAt" Type="datetime2" Precision="7" />
+    <Property Name="Locale" Type="nvarchar" MaxLength="10" />
+    <Property Name="DevicePreference" Type="nvarchar" MaxLength="100" />
+    <Property Name="EcomStatus" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
   <EntityContainer Name="TiktokishModelStoreContainer">
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserInfo" EntityType="Self.UserInfo" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [UserInfo].[Id] AS [Id], 

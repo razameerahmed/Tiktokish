@@ -92,21 +92,20 @@ public class AuthController : ControllerBase
 	[HttpPost("login")]
 	public async Task<IActionResult> Login([FromBody] UserLogin user)
 	{
-		var userServiceUrl =_configuration["Services:UserService"]; // e.g. "https://localhost:5002"
+		//var userServiceUrl =_configuration["Services:UserService"]; // e.g. "https://localhost:5002"
 
-
-		//var response = await _httpClient.PostAsJsonAsync($"{userServiceUrl}/UserService/ValidateLogin", "");
-		//var response = await _httpClient.PostAsJsonAsync("UserService/ValidateLogin", "");
-		try
+		var correlationId = HttpContext.Request.Headers["X-Correlation-ID"].ToString();
+		var request = new LoginRequest
 		{
-			var correlationId = HttpContext.Request.Headers["X-Correlation-ID"].ToString();
-			var request= new LoginRequest
-			{
-				Identifier = user.Username,
-				Password = user.Password,
-				correlationId= correlationId
-			};
+			Identifier = user.Username,
+			Password = user.Password,
+			correlationId = correlationId,
+			Token = ""
+		};
+		try
+		{			
 			var response = await _httpHelper.PostJsonAsync("/userservice/validatelogin", request);
+			ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), correlationId, request.Identifier, "machine name", this.GetType().Name, "User logged in", 1);
 
 			//if (!response)
 			//{
@@ -123,6 +122,7 @@ public class AuthController : ControllerBase
 		}
 		catch (Exception ex)
 		{
+			ActivityLogger.Instance.SystemLog(NLog.LogLevel.Error, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), correlationId, request.Identifier, "machine name", this.GetType().Name, ex.Message, 0, ex);
 			return BadRequest("Message"+ ex);
 		}
 
@@ -157,6 +157,31 @@ public class AuthController : ControllerBase
 		//	return Ok(new { token });
 		//}
 		//return Unauthorized();
+	}
+
+	[HttpPost("createuseraccount")]
+	public async Task<IActionResult> CreateUserAccount([FromBody] UserLogin user)
+	{
+		var correlationId = HttpContext.Request.Headers["X-Correlation-ID"].ToString();
+		var request = new LoginRequest
+		{
+			Identifier = user.Username,
+			Password = user.Password,
+			correlationId = correlationId,
+			Token = ""
+		};
+		try
+		{			
+			var response = await _httpHelper.PostJsonAsync("/userservice/createuseraccount", request);
+			ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), correlationId, request.Identifier, "machine name", this.GetType().Name, "User account created", 1);
+			return Ok(
+				 response);
+		}
+		catch (Exception ex)
+		{
+			ActivityLogger.Instance.SystemLog(NLog.LogLevel.Error, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), correlationId, request.Identifier, "machine name", this.GetType().Name, ex.Message, 0, ex);
+			return BadRequest("Message" + ex);
+		}
 	}
 
 	//private string GenerateJwtToken(string username)

@@ -13,5 +13,28 @@
   </EntityType>
   <EntityContainer Name="TiktokishEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="UserInfoes" EntityType="Self.UserInfo" />
+    <EntitySet Name="Users" EntityType="TiktokishModel.Users" />
   </EntityContainer>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="RealName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="PasswordHash" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="AvatarUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Bio" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="UpdatedAt" Type="DateTime" Precision="7" />
+    <Property Name="IsVerified" Type="Boolean" Nullable="false" />
+    <Property Name="Role" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LastLoginAt" Type="DateTime" Precision="7" />
+    <Property Name="Locale" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="DevicePreference" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="EcomStatus" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
 </Schema>

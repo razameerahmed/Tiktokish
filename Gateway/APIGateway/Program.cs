@@ -5,21 +5,23 @@ using Common.Interface;
 using Extension.Security.Implementation;
 using Extension.Security.Interface;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.IdentityModel.Tokens;
 using NLog;
 using NLog.Web;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net.Http.Headers;
+using System.Reflection;
 using System.Text;
 
 var logger = LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
 
 try
 {
-    //logger.Debug("Starting Gateway API...");
-    ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, "Starting Gateway API...", ActionType.View.ToString(), "", "User", "machine name","", "User account created", 1);
+	//logger.Debug("Starting Gateway API...");
+	ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, "Starting Gateway API...", ActionType.View.ToString(), "", "User", "machine name", "", "User account created", 1);
 
-    var builder = WebApplication.CreateBuilder(args);
+	var builder = WebApplication.CreateBuilder(args);
 
 	// Add services to the container.
 	builder.Services.AddScoped<IUserManager, UserManager>();
@@ -30,7 +32,21 @@ try
 
 	builder.Services.AddControllers();
 	builder.Services.AddEndpointsApiExplorer();
-	builder.Services.AddSwaggerGen();
+	//builder.Services.AddSwaggerGen();
+
+	builder.Services.AddSwaggerGen
+	(options =>
+	{
+		var gatewayAssembly = Assembly.GetExecutingAssembly();
+		options.DocInclusionPredicate((docName, apiDesc) =>
+		{
+			if (apiDesc.ActionDescriptor is ControllerActionDescriptor cad)
+			{
+				return cad.ControllerTypeInfo.Assembly == gatewayAssembly;
+			}
+			return false;
+			});
+	});
 
 	builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 		.AddJwtBearer(options =>
@@ -120,9 +136,9 @@ try
 }
 catch (Exception ex)
 {
-    ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, "Stopped program because of exception", ActionType.View.ToString(), "", "User", "machine name", "", ex.Message, 0, ex);
+	ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, "Stopped program because of exception", ActionType.View.ToString(), "", "User", "machine name", "", ex.Message, 0, ex);
 
-    throw;
+	throw;
 }
 finally
 {

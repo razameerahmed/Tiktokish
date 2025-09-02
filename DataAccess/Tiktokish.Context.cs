@@ -15,7 +15,7 @@ namespace DataAccess
     
     public partial class TiktokishEntities : DbContext
     {
-        public TiktokishEntities(object p)
+        public TiktokishEntities()
             : base("name=TiktokishEntities")
         {
         }
@@ -26,5 +26,6 @@ namespace DataAccess
         }
     
         public virtual DbSet<UserInfo> UserInfoes { get; set; }
+        public virtual DbSet<Users> Users { get; set; }
     }
 }

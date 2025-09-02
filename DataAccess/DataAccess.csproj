@@ -75,6 +75,9 @@
     <Compile Include="UserInfo.cs">
       <DependentUpon>Tiktokish.tt</DependentUpon>
     </Compile>
+    <Compile Include="Users.cs">
+      <DependentUpon>Tiktokish.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
