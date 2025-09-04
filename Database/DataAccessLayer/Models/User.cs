@@ -11,31 +11,31 @@ public partial class User
 
     public string? Email { get; set; }
 
-    public string? PhoneNumber { get; set; }
+    public string? Phonenumber { get; set; }
 
-    public string? RealName { get; set; }
+    public string? Fullname { get; set; }
 
-    public string PasswordHash { get; set; } = null!;
+    public string Passwordhash { get; set; } = null!;
 
-    public string? AvatarUrl { get; set; }
+    public string? Avatarurl { get; set; }
 
-    public string? Bio { get; set; }
+    public string? Biometric { get; set; }
 
-    public bool IsActive { get; set; }
+    public bool Isactive { get; set; }
 
-    public DateTime CreatedAt { get; set; }
+    public DateTime Createdat { get; set; }
 
-    public DateTime? UpdatedAt { get; set; }
+    public DateTime? Updatedat { get; set; }
 
-    public bool IsVerified { get; set; }
+    public bool Isverified { get; set; }
 
     public string Role { get; set; } = null!;
 
-    public DateTime? LastLoginAt { get; set; }
+    public DateTime? Lastloginat { get; set; }
 
     public string? Locale { get; set; }
 
-    public string? DevicePreference { get; set; }
+    public string? Devicetype { get; set; }
 
-    public string EcomStatus { get; set; } = null!;
+    public string? Lastlocation { get; set; }
 }

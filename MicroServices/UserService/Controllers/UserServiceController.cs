@@ -1,22 +1,10 @@
 ﻿using Common.Implementation;
 using Common.Interface;
 using Common.Model;
-using DataAccess;
-using DataAccessLayer.Models;
-using Extension.Security.Implementation;
 using Extension.Security.Interface;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using NLog;
-using NLog.Web;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
 
 
 namespace UserService.Controllers

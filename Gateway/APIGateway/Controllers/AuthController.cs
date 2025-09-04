@@ -1,23 +1,10 @@
-﻿using APIGateway;
-using Azure.Core;
-using Common;
+﻿using Common;
 using Common.Implementation;
 using Common.Interface;
 using Common.Model;
-using DataAccess;
-using DataAccessLayer.Models;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
-using System.Configuration;
-using System.IdentityModel.Tokens.Jwt;
-using System.Net.Http;
-using System.Security.Claims;
-using System.Text;
-using UserService;
 
 [ApiController]
 [Route("api/[controller]")]

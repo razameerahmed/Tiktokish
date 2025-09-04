@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Threading.Tasks;
-
-namespace APIGateway.Middleware
+﻿namespace APIGateway.Middleware
 {
 	public class CorrelationIdMiddleware
 	{

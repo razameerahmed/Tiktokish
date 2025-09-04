@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using NLog;
-using System.Threading.Tasks;
+﻿using NLog;
 using ILogger = NLog.ILogger;
 
 namespace APIGateway.Middleware

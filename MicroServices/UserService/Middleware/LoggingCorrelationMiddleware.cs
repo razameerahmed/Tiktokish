@@ -1,6 +1,4 @@
-﻿using Common.Implementation;
-using Common.Interface;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using NLog;
 using System.Threading.Tasks;
 
