@@ -13,5 +13,7 @@ namespace Extension.Security.Interface
 		public bool TestConnection(string header, string tranMessage);
 		public ResponseModel<LoginResponse> ValidateLogin(LoginRequest request, ResponseModel<LoginResponse> response);
 		public ResponseModel<LoginResponse> AddUser(LoginRequest request, ResponseModel<LoginResponse> response);
+		public ResponseModel<LoginResponse> UpdateUser(CommonUser request, ResponseModel<LoginResponse> response);
+		public ResponseModel<LoginResponse> ValidateUserForAdd(CommonUser request, ResponseModel<LoginResponse> response);
 	}
 }

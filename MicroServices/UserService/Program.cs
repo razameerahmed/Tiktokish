@@ -3,6 +3,7 @@ using Common.Interface;
 using Extension.Security.Implementation;
 using Extension.Security.Interface;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -24,6 +25,11 @@ try
 	// NLog: setup NLog for Dependency injection
 	builder.Logging.ClearProviders();
 	builder.Host.UseNLog();
+
+
+	// Add config and services
+	builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
+
 
 	// Add services to the container.
 	builder.Services.AddScoped<IUserManager, UserManager>();

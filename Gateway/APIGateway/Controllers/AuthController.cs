@@ -4,6 +4,8 @@ using Common;
 using Common.Implementation;
 using Common.Interface;
 using Common.Model;
+using DataAccess;
+using DataAccessLayer.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -23,7 +25,7 @@ public class AuthController : ControllerBase
 {
 
 	private readonly IHttpClientFactory _httpClientFactory;
-    private readonly IDistributedCache _cache;
+	private readonly IDistributedCache _cache;
 	private readonly TimeSpan _cacheExpiry = TimeSpan.FromMinutes(5);
 	private readonly IHTTPHelper _httpHelper;
 	//private readonly IHTTPHelper _httpAuthHelper;
@@ -34,7 +36,7 @@ public class AuthController : ControllerBase
 	public AuthController(IHttpClientFactory httpClientFactory, IDistributedCache cache, Func<string, IHTTPHelper> httpHelperFactory, IHttpContextAccessor httpContextAccessor, HttpClient httpClient, IConfiguration configuration)
 	{
 		_httpClientFactory = httpClientFactory;
-        _cache = cache;
+		_cache = cache;
 		_httpHelper = httpHelperFactory("https://localhost:44323");
 		//_httpAuthHelper = httpHelperFactory("https://localhost:44333");
 		_httpContextAccessor = httpContextAccessor;
@@ -43,45 +45,45 @@ public class AuthController : ControllerBase
 	}
 
 	[HttpPost("logincache")]
-    public async Task<IActionResult> LoginFromCache([FromBody] UserLogin user)
-    {
-        string cacheKey = "";
-        string correlationId = new Guid().ToString();
+	public async Task<IActionResult> LoginFromCache([FromBody] UserLogin user)
+	{
+		string cacheKey = "";
+		string correlationId = new Guid().ToString();
 
-        try
-        {
-            ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), correlationId, "User", "machine name", this.GetType().Name, "User account created", 1);
+		try
+		{
+			ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), correlationId, "User", "machine name", this.GetType().Name, "User account created", 1);
 
-            _ = _httpHelper.GetAsync("userservice");
+			_ = _httpHelper.GetAsync("userservice");
 
-            cacheKey = $"Item_{user.Username}";
+			cacheKey = $"Item_{user.Username}";
 
-            // Step 1: Try to get the item from Redis cache
-            var cachedItem = await _cache.GetStringAsync(cacheKey);
-            if (cachedItem != null)
-            {
-                Console.WriteLine("✅ Item retrieved from cache!");
-                return Ok(cachedItem);
-            }
-        }
-        catch (Exception ex)
-        {
-            ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), correlationId, "User", "machine name", this.GetType().Name, ex.Message, 0, ex);
-            throw; // Fixed CA2200: Use 'throw;' to preserve stack trace
-        }
+			// Step 1: Try to get the item from Redis cache
+			var cachedItem = await _cache.GetStringAsync(cacheKey);
+			if (cachedItem != null)
+			{
+				Console.WriteLine("✅ Item retrieved from cache!");
+				return Ok(cachedItem);
+			}
+		}
+		catch (Exception ex)
+		{
+			ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), correlationId, "User", "machine name", this.GetType().Name, ex.Message, 0, ex);
+			throw; // Fixed CA2200: Use 'throw;' to preserve stack trace
+		}
 
-        // Step 2: Simulate database fetch (or real DB call in a production app)
-        var item = await FetchItemFromDatabase(user.Username);
+		// Step 2: Simulate database fetch (or real DB call in a production app)
+		var item = await FetchItemFromDatabase(user.Username);
 
-        // Step 3: Cache the item in Redis
-        await _cache.SetStringAsync(
-            cacheKey,
-            JsonConvert.SerializeObject(item),
-            new DistributedCacheEntryOptions { AbsoluteExpirationRelativeToNow = _cacheExpiry }
-        );
+		// Step 3: Cache the item in Redis
+		await _cache.SetStringAsync(
+			cacheKey,
+			JsonConvert.SerializeObject(item),
+			new DistributedCacheEntryOptions { AbsoluteExpirationRelativeToNow = _cacheExpiry }
+		);
 
-        return Ok(item);
-    }
+		return Ok(item);
+	}
 
 	private Task<UserLogin> FetchItemFromDatabase(string userName)
 	{
@@ -95,6 +97,8 @@ public class AuthController : ControllerBase
 		//var userServiceUrl =_configuration["Services:UserService"]; // e.g. "https://localhost:5002"
 
 		var correlationId = HttpContext.Request.Headers["X-Correlation-ID"].ToString();
+
+
 		var request = new LoginRequest
 		{
 			Identifier = user.Username,
@@ -103,7 +107,7 @@ public class AuthController : ControllerBase
 			Token = ""
 		};
 		try
-		{			
+		{
 			var response = await _httpHelper.PostJsonAsync("/userservice/validatelogin", request);
 			ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), correlationId, request.Identifier, "machine name", this.GetType().Name, "User logged in", 1);
 
@@ -123,10 +127,10 @@ public class AuthController : ControllerBase
 		catch (Exception ex)
 		{
 			ActivityLogger.Instance.SystemLog(NLog.LogLevel.Error, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), correlationId, request.Identifier, "machine name", this.GetType().Name, ex.Message, 0, ex);
-			return BadRequest("Message"+ ex);
+			return BadRequest("Message" + ex);
 		}
 
-		
+
 
 		//var correlationId = _httpContextAccessor.HttpContext.Request.Headers["X-Correlation-ID"].ToString();
 
@@ -171,7 +175,7 @@ public class AuthController : ControllerBase
 			Token = ""
 		};
 		try
-		{			
+		{
 			var response = await _httpHelper.PostJsonAsync("/userservice/createuseraccount", request);
 			ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), correlationId, request.Identifier, "machine name", this.GetType().Name, "User account created", 1);
 			return Ok(
@@ -180,6 +184,56 @@ public class AuthController : ControllerBase
 		catch (Exception ex)
 		{
 			ActivityLogger.Instance.SystemLog(NLog.LogLevel.Error, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), correlationId, request.Identifier, "machine name", this.GetType().Name, ex.Message, 0, ex);
+			return BadRequest("Message" + ex);
+		}
+	}
+
+	[HttpPost("edituser")]
+	public async Task<IActionResult> EditUser(CommonUser user)
+	{
+		var correlationId = HttpContext.Request.Headers["X-Correlation-ID"].ToString();
+		var request = new CommonUser
+		{
+			Username = user.Username,
+			Password = user.Password,
+			CorrelationId = correlationId,
+			Token = ""
+		};
+		try
+		{
+			var response = await _httpHelper.PostJsonAsync("/userservice/edituser", request);
+			ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), correlationId, request.Username, "machine name", this.GetType().Name, "User Updated", 1);
+			return Ok(
+				 response);
+		}
+		catch (Exception ex)
+		{
+			ActivityLogger.Instance.SystemLog(NLog.LogLevel.Error, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), correlationId, request.Username, "machine name", this.GetType().Name, ex.Message, 0, ex);
+			return BadRequest("Message" + ex);
+		}
+	}
+
+	[HttpPost("validateusername")]
+	public async Task<IActionResult> ValidateUsername([FromBody] CommonUser user)
+	{
+		var correlationId = HttpContext.Request.Headers["X-Correlation-ID"].ToString();
+		var request = new CommonUser
+		{
+			Username = user.Username,
+			Password = user.Password,
+			CorrelationId = correlationId,
+			Token = ""
+		};
+		try
+		{
+			var response = await _httpHelper.PostJsonAsync("/userservice/validateusername", request);
+			ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), correlationId, request.Username, "machine name", this.GetType().Name, "User Updated", 1);
+			return Ok(
+				 response);
+		}
+		catch (Exception ex)
+		{
+			ActivityLogger.Instance.SystemLog(NLog.LogLevel.Error, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), correlationId, request.Username, "machine name", this.GetType().Name, ex.Message, 0, ex);
 			return BadRequest("Message" + ex);
 		}
 	}

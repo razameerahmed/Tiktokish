@@ -27,6 +27,22 @@
   },
   {
     "ContainingType": "UserService.Controllers.UserServiceController",
+    "Method": "EditUser",
+    "RelativePath": "UserService/edituser",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Common.Model.CommonUser",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UserService.Controllers.UserServiceController",
     "Method": "ValidateLogin",
     "RelativePath": "UserService/validatelogin",
     "HttpMethod": "POST",
@@ -36,6 +52,22 @@
       {
         "Name": "request",
         "Type": "Common.Model.LoginRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UserService.Controllers.UserServiceController",
+    "Method": "ValidateUsername",
+    "RelativePath": "UserService/validateusername",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Common.Model.CommonUser",
         "IsRequired": true
       }
     ],
