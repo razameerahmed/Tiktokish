@@ -24,11 +24,12 @@ public class AuthController : ControllerBase
 	{
 		_httpClientFactory = httpClientFactory;
 		_cache = cache;
-		_httpHelper = httpHelperFactory("https://localhost:44323");
+		_configuration = configuration;
+		_httpHelper = httpHelperFactory(_configuration["Services:UserService"]);
+		//httpHelperFactory("https://localhost:44323");
 		//_httpAuthHelper = httpHelperFactory("https://localhost:44333");
 		_httpContextAccessor = httpContextAccessor;
 		_httpClient = httpClient;
-		_configuration = configuration;
 	}
 
 	[HttpPost("logincache")]
