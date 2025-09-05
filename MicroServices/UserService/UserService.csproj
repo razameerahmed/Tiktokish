@@ -18,7 +18,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\BusinessLogic\Extension.Security\Extension.Security.csproj" />
     <ProjectReference Include="..\..\CommonLib\Common\Common.csproj" />
-    <ProjectReference Include="..\..\DataAccess\DataAccess.csproj" />
     <ProjectReference Include="..\..\Database\DataAccessLayer\DataAccessLayer.csproj" />
   </ItemGroup>
 
