@@ -2,6 +2,6 @@
 {
 	public interface IEmailHelper
 	{
-		Task<string> GenerateEmail(string content);
+		Task<string> GenerateEmail(string subject, string content);
 	}
 }

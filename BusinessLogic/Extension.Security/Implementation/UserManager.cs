@@ -16,13 +16,15 @@ namespace Extension.Security.Implementation
     public class UserManager : IUserManager
     {
 		private readonly string _connectionString;
-
-        public UserManager(IConfiguration configuration)
+		private INotificationManager _notificationManager;
+        public UserManager(IConfiguration configuration, INotificationManager notificationManager)
         {
             var connStr = configuration.GetConnectionString("DefaultConnection");
             if (string.IsNullOrEmpty(connStr))
                 throw new InvalidOperationException("Connection string 'DefaultConnection' is missing or null.");
             _connectionString = connStr;
+			_notificationManager = notificationManager;
+
         }
 		public bool TestConnection(string header, string tranMessage)
         {
@@ -42,7 +44,6 @@ namespace Extension.Security.Implementation
 			try
 			{
 				ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), request.correlationId, request.Identifier, "machine name", this.GetType().Name, "Login", 1);
-
 				string token = request.Token;
 				using (TiktokishContext context = new(_connectionString))
 				{

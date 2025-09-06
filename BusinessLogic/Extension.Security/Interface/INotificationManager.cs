@@ -4,7 +4,7 @@ namespace Extension.Security.Interface
 {
 	public interface INotificationManager
 	{
-		public bool TestConnection(string header, string tranMessage);
+		public bool GenerateOTP(string header, string tranMessage);
 		
 	}
 }
