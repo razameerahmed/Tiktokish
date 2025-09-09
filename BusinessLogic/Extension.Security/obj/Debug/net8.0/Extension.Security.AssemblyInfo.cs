@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Extension.Security")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ca6aec861e766d08f175ed90e3a111dfc221bf47")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fd133fa50a14d5d4d979a13c6b5f9801d4a5b0a8")]
 [assembly: System.Reflection.AssemblyProductAttribute("Extension.Security")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Extension.Security")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

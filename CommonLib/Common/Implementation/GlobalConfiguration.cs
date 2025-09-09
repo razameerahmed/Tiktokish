@@ -10,7 +10,7 @@ namespace Common.Implementation
 	{
 		public static string TokenIssuer = "yourdomain.com";
 		public static string TokenAudience = "yourdomain.com";
-		public static string ToeknSecretKey = "your_super_secret_key_1111111111";
+		public static string TokenSecretKey = "your_super_secret_key_1111111111";
 		public static string HashSalt = "TIKTOKISH";
 	}
 }

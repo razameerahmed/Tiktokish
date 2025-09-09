@@ -76,7 +76,7 @@ try
 				ValidateIssuerSigningKey = true,
 				ValidIssuer = GlobalConfiguration.TokenIssuer,
 				ValidAudience = GlobalConfiguration.TokenAudience,
-				IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(GlobalConfiguration.ToeknSecretKey))
+				IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(GlobalConfiguration.TokenSecretKey))
 			};
 		});
 

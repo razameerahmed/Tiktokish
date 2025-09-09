@@ -286,7 +286,7 @@ namespace Extension.Security.Implementation
 			new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
 		};
 
-			var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(GlobalConfiguration.ToeknSecretKey));
+			var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(GlobalConfiguration.TokenSecretKey));
 			var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
 			var token = new JwtSecurityToken(
@@ -305,8 +305,8 @@ namespace Extension.Security.Implementation
 		{
 			var tokenHandler = new JwtSecurityTokenHandler();
 
-			var key = Convert.FromBase64String(GlobalConfiguration.ToeknSecretKey); // or Encoding.UTF8.GetBytes for raw keys
-
+			var key = Encoding.UTF8.GetBytes(GlobalConfiguration.TokenSecretKey); // or Encoding.UTF8.GetBytes for raw keys
+			
 			var validationParameters = new TokenValidationParameters
 			{
 				ValidateIssuerSigningKey = true,
@@ -326,8 +326,8 @@ namespace Extension.Security.Implementation
 			{
 				var principal = tokenHandler.ValidateToken(token, validationParameters, out SecurityToken validatedToken);
 
-				var username = principal.FindFirst("username")?.Value;
-				var domain = principal.FindFirst("domain")?.Value;
+				var username = principal.Claims.First().Value;
+				var domain = principal.Claims.First().Issuer;
 
 				if (username == requestUsername && domain == requestDomain)
 				{
