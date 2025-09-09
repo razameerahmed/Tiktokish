@@ -1,4 +1,6 @@
 *.dll
 *.pdb
-/.vs
+/.vs/*
 *.bin
+*.cache
+*.exe
