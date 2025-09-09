@@ -33,11 +33,11 @@ namespace Extension.Security.Implementation
             _pushNotificationHelper = pushNotificationHelper;
 
         }
-		public bool GenerateOTP(string header, string tranMessage)
+		public async Task<bool> GenerateOTP(string header, string tranMessage)
         {
-            _smsHelper.GenerateSMS("");
-            _emailHelper.GenerateEmail("Login Email","Successfull Login");
-            _pushNotificationHelper.GeneratePushNotification("");
+            await _smsHelper.GenerateSMS("");
+            await _emailHelper.GenerateEmail("Login Email","Successfull Login");
+            await _pushNotificationHelper.GeneratePushNotification("");
 
 
 			return true;
