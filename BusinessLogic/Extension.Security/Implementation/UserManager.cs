@@ -248,10 +248,19 @@ namespace Extension.Security.Implementation
 			return response;
 		}
 
+		public string RefreshToken(string userName, string token,string requestDomain) {
+			if (ValidateToken(token, userName, requestDomain))
+			{
+				return GenerateJwtToken(userName);
+			}
+			else {
+				return "Username or domain mismatch.";
+			}
+		}
 
 		public string ComputeHash(string input)
 		{
-			string hashSalt = "TIKTOKISH";
+			string hashSalt = GlobalConfiguration.HashSalt;
 			input = string.Concat(input, hashSalt);
 			byte[] byteData = [];//System.Security.Cryptography.Encoding.GetBytes(input);
 			string result;
@@ -277,12 +286,12 @@ namespace Extension.Security.Implementation
 			new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
 		};
 
-			var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("your_super_secret_key_1111111111"));
+			var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(GlobalConfiguration.ToeknSecretKey));
 			var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
 			var token = new JwtSecurityToken(
-				issuer: "yourdomain.com",
-				audience: "yourdomain.com",
+				issuer: GlobalConfiguration.TokenIssuer,
+				audience: GlobalConfiguration.TokenAudience,
 				claims: claims,
 				expires: DateTime.Now.AddMinutes(30),
 				signingCredentials: creds);
@@ -291,5 +300,53 @@ namespace Extension.Security.Implementation
 
 			return tokena;
 		}
-	}
+
+		public static bool ValidateToken(string token, string requestUsername, string requestDomain)
+		{
+			var tokenHandler = new JwtSecurityTokenHandler();
+
+			var key = Convert.FromBase64String(GlobalConfiguration.ToeknSecretKey); // or Encoding.UTF8.GetBytes for raw keys
+
+			var validationParameters = new TokenValidationParameters
+			{
+				ValidateIssuerSigningKey = true,
+				IssuerSigningKey = new SymmetricSecurityKey(key),
+
+				ValidateIssuer = true,
+				ValidIssuer = GlobalConfiguration.TokenIssuer,
+
+				ValidateAudience = true,
+				ValidAudience = GlobalConfiguration.TokenAudience,
+
+				ValidateLifetime = true,
+				ClockSkew = TimeSpan.FromMinutes(5)
+			};
+
+			try
+			{
+				var principal = tokenHandler.ValidateToken(token, validationParameters, out SecurityToken validatedToken);
+
+				var username = principal.FindFirst("username")?.Value;
+				var domain = principal.FindFirst("domain")?.Value;
+
+				if (username == requestUsername && domain == requestDomain)
+				{
+					//Console.WriteLine("✅ Token is valid with correct username and domain.");
+					return true;
+				}
+				else
+				{
+					return false;
+					//Console.WriteLine("Username or domain mismatch.");
+				}
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine($"Token validation failed: {ex.Message}");
+			}
+			return false; 
+		}
+	
+
+}
 }

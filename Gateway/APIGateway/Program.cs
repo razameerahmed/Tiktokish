@@ -74,9 +74,9 @@ try
 				ValidateAudience = true,
 				ValidateLifetime = true,
 				ValidateIssuerSigningKey = true,
-				ValidIssuer = "yourdomain.com",
-				ValidAudience = "yourdomain.com",
-				IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("your_super_secret_key_1111111111"))
+				ValidIssuer = GlobalConfiguration.TokenIssuer,
+				ValidAudience = GlobalConfiguration.TokenAudience,
+				IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(GlobalConfiguration.ToeknSecretKey))
 			};
 		});
 
