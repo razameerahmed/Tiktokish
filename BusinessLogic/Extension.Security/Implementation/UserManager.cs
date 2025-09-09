@@ -1,15 +1,18 @@
-﻿using System.Text;
+﻿using Common.Implementation;
+using Common.Interface;
+using Common.Model;
 using DataAccessLayer.Models;
 using Extension.Security.Interface;
-using System.Security.Cryptography;
+using Microsoft.AspNetCore.Identity.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using Common.Interface;
-using Common.Model;
-using Microsoft.EntityFrameworkCore;
-using Common.Implementation;
-using Microsoft.Extensions.Configuration;
+using System.Security.Cryptography;
+using System.Text;
+using System.Text.RegularExpressions;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Extension.Security.Implementation
 {
@@ -39,27 +42,34 @@ namespace Extension.Security.Implementation
 
             return true;
         }
-        public ResponseModel<LoginResponse> ValidateLogin(LoginRequest request, ResponseModel<LoginResponse> response)
+        public ResponseModel<LoginResponse> ValidateLogin(Common.Model.LoginRequest request, ResponseModel<LoginResponse> response)
         {
             try
             {
-                ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), request.correlationId, request.Identifier, "machine name", this.GetType().Name, "Login", 1);
+                string issuer = GlobalConfiguration.TokenIssuer;
+
+                ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), request.correlationId, request.Username, "machine name", this.GetType().Name, "Login", 1);
                 string token = request.Token;
                 using (TiktokishContext context = new(_connectionString))
                 {
                     //var users = context.UserInfos.ToList();
                     var user = context.Users
                     .FirstOrDefault(u =>
-                        u.Username == request.Identifier ||
-                        u.Email == request.Identifier);
+                        u.Username == request.Username ||
+                        u.Email == request.Username);
 
                     if (user == null || !user.Isactive)
                     {
-                        response.Message = "Invalid login credentials.";
+                        response.Message = "Invalid login credentials or user inactive.";
                         response.Status = false;
                     }
                     else
                     {
+                        var userDevice = context.UserTrustedDevices
+                    .FirstOrDefault(ud =>
+                        ud.PkTrustedDeviceId == request.Username ||
+                        ud.Userid == user.Id);
+
                         response.Status = true;
                         response.Message = "Success";
                         response.Data = new LoginResponse();
@@ -69,9 +79,34 @@ namespace Extension.Security.Implementation
                             response.Message = "Invalid Password.";
                             response.Status = false;
                         }
-                        else if (token == null || token == "")
+                        //else if (token == null || token == "")
+                        //{
+                            response.Data.Token = RefreshToken(user.Username, token, issuer);//GenerateJwtToken(user.Username);
+                        //}
+
+                        if (userDevice == null)
                         {
-                            response.Data.Token = GenerateJwtToken(user.Username);
+                            // New device, add to trusted devices
+                            UserTrustedDevice newDevice = new()
+                            {
+                                PkTrustedDeviceId = request.DeviceId,
+                                Userid = user.Id,
+                                Blacklist = 0,
+                                Bmv = "",
+                                DeviceName = request.DeviceId,
+                                DeviceCountryCode = "PK",
+                                DeviceFirstSignIn = DateTime.Now,
+                                Devicetype = "Android",
+                                DeviceIp = "1.1.1.1",
+                                IsAllowed = 1,
+                                CreatedOn = DateTime.Now,
+                                CreatedBy = "system",
+                                UpdatedOn = DateTime.Now,
+                                UpdatedBy = "system",
+                            };
+
+                            context.Add(newDevice);
+                            context.SaveChanges();
                         }
 
                         response.Data.Username = user.Username;
@@ -81,7 +116,7 @@ namespace Extension.Security.Implementation
             }
             catch (Exception ex)
             {
-                ActivityLogger.Instance.SystemLog(NLog.LogLevel.Error, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), request.correlationId, request.Identifier, "machine name", this.GetType().Name, ex.Message, 0, ex);
+                ActivityLogger.Instance.SystemLog(NLog.LogLevel.Error, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), request.correlationId, request.Username, "machine name", this.GetType().Name, ex.Message, 0, ex);
                 response.Message += ex.Message;
                 response.Status = false;
             }
@@ -89,11 +124,20 @@ namespace Extension.Security.Implementation
             return response;
         }
 
-        public ResponseModel<LoginResponse> AddUser(LoginRequest request, ResponseModel<LoginResponse> response)
+        public ResponseModel<LoginResponse> AddUser(Common.Model.LoginRequest request, ResponseModel<LoginResponse> response)
         {
             try
             {
-                ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), request.correlationId, request.Identifier, "machine name", this.GetType().Name, "Login", 1);
+                ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), request.correlationId, request.Username, "machine name", this.GetType().Name, "Login", 1);
+
+                List<string> errors = ValidateRegistration(request);
+
+                if (errors.Any())
+                {
+                    response.Message = string.Join("; ", errors);
+                    response.Status = false;
+                    return response;
+                }
 
                 string token = request.Token;
                 response.Data = new LoginResponse();
@@ -101,18 +145,18 @@ namespace Extension.Security.Implementation
                 {
                     var user = context.Users
                     .FirstOrDefault(u =>
-                        u.Username == request.Identifier ||
-                        u.Email == request.Identifier ||
-                        u.Phonenumber == request.Identifier);
+                        u.Username == request.Username ||
+                        u.Email == request.Username ||
+                        u.Phonenumber == request.Username);
 
                     if (user == null)
                     {
                         User newUser = new();
-                        newUser.Username = request.Identifier;
-                        newUser.Email = request.Identifier;
-                        newUser.Phonenumber = request.Identifier;
-                        newUser.Fullname = request.Identifier;
-                        newUser.Passwordhash = ComputeHash(request.Identifier + request.Password);
+                        newUser.Username = request.Username;
+                        newUser.Email = request.Email;
+                        newUser.Phonenumber = request.PhoneNumber;
+                        newUser.Fullname = request.FullName;
+                        newUser.Passwordhash = ComputeHash(request.Username + request.Password);
                         newUser.Avatarurl = "";
                         newUser.Biometric = "";
                         newUser.Isactive = true;
@@ -129,11 +173,11 @@ namespace Extension.Security.Implementation
 
                         if (token == null || token == "")
                         {
-                            response.Data.Token = GenerateJwtToken(request.Identifier);
+                            response.Data.Token = GenerateJwtToken(request.Username);
                         }
                         response.Status = true;
                         response.Message = "User successfully created";
-                        response.Data.Username = request.Identifier;
+                        response.Data.Username = request.Username;
                         response.Data.IsVerified = newUser.Isverified;
                     }
                     else
@@ -146,7 +190,7 @@ namespace Extension.Security.Implementation
             }
             catch (Exception ex)
             {
-                ActivityLogger.Instance.SystemLog(NLog.LogLevel.Error, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), request.correlationId, request.Identifier, "machine name", this.GetType().Name, ex.Message, 0, ex);
+                ActivityLogger.Instance.SystemLog(NLog.LogLevel.Error, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), request.correlationId, request.Username, "machine name", this.GetType().Name, ex.Message, 0, ex);
                 response.Message += ex.Message;
                 response.Status = false;
             }
@@ -159,13 +203,26 @@ namespace Extension.Security.Implementation
                 ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), request.CorrelationId, request.Username, "machine name", this.GetType().Name, "Add User", 1);
 
                 response.Status = false;
+                List<string> errors = new List<string>();
+
+                // 1. Username validation
+                if (string.IsNullOrWhiteSpace(request.Username))
+                    errors.Add("Username is required.");
+                else if (!Regex.IsMatch(request.Username, @"^[a-z0-9_.]{3,50}$"))
+                    errors.Add("Username must be 3-50 characters long and only contain lowercase letters, numbers, underscores, or dots.");
+
+                if (errors.Any())
+                {
+                    response.Message = string.Join("; ", errors);
+                    response.Status = false;
+                    return response;
+                }
+
                 using (TiktokishContext context = new(_connectionString))
                 {
                     var user = context.Users
                     .FirstOrDefault(u =>
-                        u.Username == request.Username ||
-                        u.Email == request.Username ||
-                        u.Phonenumber == request.Username);
+                        u.Username == request.Username);
 
                     if (user != null)
                     {
@@ -350,6 +407,93 @@ namespace Extension.Security.Implementation
             return false;
         }
 
+        public static List<string> ValidateRegistration(Common.Model.LoginRequest request)
+        {
+            var errors = new List<string>();
 
+            // 1. Username validation
+            if (string.IsNullOrWhiteSpace(request.Username))
+                errors.Add("Username is required.");
+            else if (!Regex.IsMatch(request.Username, @"^[a-z0-9_.]{3,50}$"))
+                errors.Add("Username must be 3-50 characters long and only contain lowercase letters, numbers, underscores, or dots.");
+
+            // 2. Password validation
+            if (string.IsNullOrWhiteSpace(request.Password))
+                errors.Add("Password is required.");
+            else if (request.Password.Length < 8 ||
+                     !Regex.IsMatch(request.Password, @"[A-Z]") ||
+                     !Regex.IsMatch(request.Password, @"[a-z]") ||
+                     !Regex.IsMatch(request.Password, @"[0-9]") ||
+                     !Regex.IsMatch(request.Password, @"[\W_]"))
+                errors.Add("Password must be at least 8 characters and include uppercase, lowercase, number, and special character.");
+
+            // 3. Phone validation
+            if (!string.IsNullOrWhiteSpace(request.PhoneNumber) &&
+                !Regex.IsMatch(request.PhoneNumber, @"^\+?[0-9]{10,15}$"))
+                errors.Add("Phone number must be valid and include country code.");
+
+            // 4. Email validation
+            if (!string.IsNullOrWhiteSpace(request.Email) &&
+                !Regex.IsMatch(request.Email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+                errors.Add("Email format is invalid.");
+
+            // 5. Date of Birth validation (TikTok style 13+ age)
+            var age = DateTime.Today.Year - request.DateOfBirth.Year;
+            if (request.DateOfBirth > DateTime.Today.AddYears(-age)) age--;
+            if (age < 13)
+                errors.Add("User must be at least 13 years old.");
+
+            // 6. Gender validation
+            var validGenders = new[] { "Male", "Female", "Other" };
+            if (!string.IsNullOrWhiteSpace(request.Gender) &&
+                Array.IndexOf(validGenders, request.Gender) == -1)
+                errors.Add("Gender must be Male, Female, or Other.");
+
+            // 7. DeviceId validation
+            if (string.IsNullOrWhiteSpace(request.DeviceId))
+                errors.Add("DeviceId is required.");
+
+            return errors;
+        }
+
+        public static List<string> ValidateUpdate(Common.Model.LoginRequest request)
+        {
+            var errors = new List<string>();
+
+            if (!string.IsNullOrWhiteSpace(request.Password))
+            {
+                if (request.Password.Length < 8 ||
+                    !Regex.IsMatch(request.Password, @"[A-Z]") ||
+                    !Regex.IsMatch(request.Password, @"[a-z]") ||
+                    !Regex.IsMatch(request.Password, @"[0-9]") ||
+                    !Regex.IsMatch(request.Password, @"[\W_]"))
+                {
+                    errors.Add("Password must be at least 8 characters and include uppercase, lowercase, number, and special character.");
+                }
+            }
+
+            if (!string.IsNullOrWhiteSpace(request.PhoneNumber) &&
+                !Regex.IsMatch(request.PhoneNumber, @"^\+?[0-9]{10,15}$"))
+                errors.Add("Phone number must be 10–15 digits and may start with +.");
+
+            if (!string.IsNullOrWhiteSpace(request.Email) &&
+                !Regex.IsMatch(request.Email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+                errors.Add("Invalid email address format.");
+
+            if (!string.IsNullOrWhiteSpace(request.Gender) &&
+                !new[] { "Male", "Female", "Other" }.Contains(request.Gender))
+                errors.Add("Gender must be Male, Female, or Other.");
+
+            if (request.DateOfBirth != null)
+            {
+                var dob = request.DateOfBirth;
+                var age = DateTime.Today.Year - dob.Year;
+                if (dob > DateTime.Today.AddYears(-age)) age--;
+
+                if (age < 13)
+                    errors.Add("User must be at least 13 years old.");
+            }
+            return errors;
+        }
     }
 }

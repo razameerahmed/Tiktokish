@@ -1,4 +1,5 @@
-﻿using Common;
+﻿using Azure;
+using Common;
 using Common.Implementation;
 using Common.Interface;
 using Common.Model;
@@ -81,37 +82,31 @@ public class AuthController : ControllerBase
 	private Task<UserLogin> FetchItemFromDatabase(string userName)
 	{
 		// Simulating a databasUserLogine call
-		return Task.FromResult(new UserLogin { Username = "Khalid", Password = "Abc123" });
+		return Task.FromResult(new UserLogin { Username = "Khalid", Password = "Abc123", CountryCode = "Abc123", DeviceId = "Abc123", Email = "Abc123", PhoneNumber = "Abc123" });
 	}
 
 	[HttpPost("login")]
-	public async Task<IActionResult> Login([FromBody] UserLogin user)
+	public async Task<IActionResult> Login([FromBody] LoginRequest userRequest)
 	{
-		//var userServiceUrl =_configuration["Services:UserService"]; // e.g. "https://localhost:5002"
-
 		var correlationId = HttpContext.Request.Headers["X-Correlation-ID"].ToString();
-
-
-		var request = new LoginRequest
-		{
-			Identifier = user.Username,
-			Password = user.Password,
-			correlationId = correlationId,
-			Token = ""
-		};
+		 
 		try
 		{
-			var response = await _httpHelper.PostJsonAsync("/userservice/validatelogin", request);
-			ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), correlationId, request.Identifier, "machine name", this.GetType().Name, "User logged in", 1);
+            var response = await _httpHelper.PostJsonAsync("/userservice/validatelogin", userRequest);
+			ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), correlationId, userRequest.Username, "machine name", this.GetType().Name, "User logged in", 1);
 
-			//if (!response)
+
+			//if (!response.IsSuccessStatusCode)
 			//{
-			//	var error = await response..Content.ReadAsStringAsync();
-			//	return StatusCode((int)response.StatusCode, error);
+			//	var errorText = await response.Content.ReadAsStringAsync();
+			//	return StatusCode((int)response.StatusCode, new
+			//	{
+			//		ok = false,
+			//		from = "Gateway",
+			//		downstreamStatus = response.StatusCode,
+			//		downstreamBody = errorText
+			//	});
 			//}
-			//var loginResponse = await response.Content.ReadFromJsonAsync<LoginResponse>();
-			//return Ok(loginResponse);
-
 
 			return Ok(
 				 response);
@@ -119,11 +114,9 @@ public class AuthController : ControllerBase
 		}
 		catch (Exception ex)
 		{
-			ActivityLogger.Instance.SystemLog(NLog.LogLevel.Error, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), correlationId, request.Identifier, "machine name", this.GetType().Name, ex.Message, 0, ex);
+			ActivityLogger.Instance.SystemLog(NLog.LogLevel.Error, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), correlationId, userRequest.Username, "machine name", this.GetType().Name, ex.Message, 0, ex);
 			return BadRequest("Message" + ex);
 		}
-
-
 
 		//var correlationId = _httpContextAccessor.HttpContext.Request.Headers["X-Correlation-ID"].ToString();
 
@@ -157,26 +150,26 @@ public class AuthController : ControllerBase
 	}
 
 	[HttpPost("createuseraccount")]
-	public async Task<IActionResult> CreateUserAccount([FromBody] UserLogin user)
+	public async Task<IActionResult> CreateUserAccount([FromBody] LoginRequest userRequest)
 	{
 		var correlationId = HttpContext.Request.Headers["X-Correlation-ID"].ToString();
-		var request = new LoginRequest
-		{
-			Identifier = user.Username,
-			Password = user.Password,
-			correlationId = correlationId,
-			Token = ""
-		};
+		//var request = new LoginRequest
+		//{
+		//	Username = user.Username,
+		//	Password = user.Password,
+		//	correlationId = correlationId,
+		//	Token = ""
+		//};
 		try
 		{
-			var response = await _httpHelper.PostJsonAsync("/userservice/createuseraccount", request);
-			ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), correlationId, request.Identifier, "machine name", this.GetType().Name, "User account created", 1);
+			var response = await _httpHelper.PostJsonAsync("/userservice/createuseraccount", userRequest);
+			ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), correlationId, userRequest.Username, "machine name", this.GetType().Name, "User account created", 1);
 			return Ok(
 				 response);
 		}
 		catch (Exception ex)
 		{
-			ActivityLogger.Instance.SystemLog(NLog.LogLevel.Error, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), correlationId, request.Identifier, "machine name", this.GetType().Name, ex.Message, 0, ex);
+			ActivityLogger.Instance.SystemLog(NLog.LogLevel.Error, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), correlationId, userRequest.Username, "machine name", this.GetType().Name, ex.Message, 0, ex);
 			return BadRequest("Message" + ex);
 		}
 	}
@@ -207,16 +200,14 @@ public class AuthController : ControllerBase
 	}
 
 	[HttpPost("validateusername")]
-	public async Task<IActionResult> ValidateUsername([FromBody] CommonUser user)
+	public async Task<IActionResult> ValidateUsername([FromBody] CommonUser request)
 	{
 		var correlationId = HttpContext.Request.Headers["X-Correlation-ID"].ToString();
-		var request = new CommonUser
+
+		if (string.IsNullOrEmpty(request.Username))
 		{
-			Username = user.Username,
-			Password = user.Password,
-			CorrelationId = correlationId,
-			Token = ""
-		};
+            return BadRequest("Message Username is required");
+        }
 		try
 		{
 			var response = await _httpHelper.PostJsonAsync("/userservice/validateusername", request);

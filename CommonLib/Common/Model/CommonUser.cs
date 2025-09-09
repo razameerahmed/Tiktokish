@@ -1,3 +1,5 @@
+using DataAccessLayer.Models;
+
 namespace Common.Model
 {
 	public class CommonUser
@@ -38,5 +40,7 @@ namespace Common.Model
         public required string CorrelationId { get; set; }
         public required string Password { get; set; }
         public string Token { get; set; }
-	}
+
+        public UserTrustedDevice? UserTrustedDevice { get; set; }
+    }
 }
