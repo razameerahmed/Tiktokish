@@ -6,7 +6,7 @@ namespace DataAccessLayer.Models;
 
 public partial class TiktokishContext : DbContext
 {
-    public TiktokishContext(string v)
+    public TiktokishContext(string connection)
     {
     }
 
@@ -17,7 +17,17 @@ public partial class TiktokishContext : DbContext
 
     public virtual DbSet<AuditLog> AuditLogs { get; set; }
 
+    public virtual DbSet<BulkNotification> BulkNotifications { get; set; }
+
+    public virtual DbSet<NotificationTemplate> NotificationTemplates { get; set; }
+
+    public virtual DbSet<NotificationType> NotificationTypes { get; set; }
+
     public virtual DbSet<User> Users { get; set; }
+
+    public virtual DbSet<UserNotificationSubscribtion> UserNotificationSubscribtions { get; set; }
+
+    public virtual DbSet<UserOtp> UserOtps { get; set; }
 
     public virtual DbSet<UserPwdHistory> UserPwdHistories { get; set; }
 
@@ -27,7 +37,7 @@ public partial class TiktokishContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=DESKTOP-HK2464R\\SQLEXPRESS;User ID=sa;Password=avanza@123;Database=Tiktokish;Trusted_Connection=True;TrustServerCertificate=True;");
+        => optionsBuilder.UseSqlServer("Server=AS-EFT-KHALID\\KHALID;Database=Tiktokish;User ID=avanza;Password=avanza123;Trusted_Connection=False;Encrypt=True;TrustServerCertificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -53,6 +63,112 @@ public partial class TiktokishContext : DbContext
                 .IsUnicode(false)
                 .HasColumnName("ACTION_TYPE");
             entity.Property(e => e.Userid).HasColumnName("USERID");
+        });
+
+        modelBuilder.Entity<BulkNotification>(entity =>
+        {
+            entity.ToTable("BULK_NOTIFICATION");
+
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.CreatedBy)
+                .HasMaxLength(30)
+                .IsUnicode(false)
+                .HasColumnName("CREATED_BY");
+            entity.Property(e => e.CreatedOn)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnName("CREATED_ON");
+            entity.Property(e => e.Email)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .HasColumnName("EMAIL");
+            entity.Property(e => e.IsExported).HasColumnName("IS_EXPORTED");
+            entity.Property(e => e.IsSent).HasColumnName("IS_SENT");
+            entity.Property(e => e.Message)
+                .HasMaxLength(500)
+                .IsUnicode(false)
+                .HasColumnName("MESSAGE");
+            entity.Property(e => e.MobileNumber)
+                .HasMaxLength(20)
+                .IsUnicode(false)
+                .HasColumnName("MOBILE_NUMBER");
+            entity.Property(e => e.NotificationType).HasColumnName("NOTIFICATION_TYPE");
+            entity.Property(e => e.Priority)
+                .HasDefaultValue(0)
+                .HasColumnName("PRIORITY");
+            entity.Property(e => e.UpdatedBy)
+                .HasMaxLength(30)
+                .IsUnicode(false)
+                .HasColumnName("UPDATED_BY");
+            entity.Property(e => e.UpdatedOn)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnName("UPDATED_ON");
+            entity.Property(e => e.Username)
+                .HasMaxLength(50)
+                .HasColumnName("USERNAME");
+        });
+
+        modelBuilder.Entity<NotificationTemplate>(entity =>
+        {
+            entity.HasKey(e => e.PkTemplateId).HasName("PK_NOTIF_TEMPLATE");
+
+            entity.ToTable("NOTIFICATION_TEMPLATES");
+
+            entity.Property(e => e.PkTemplateId)
+                .HasColumnType("numeric(10, 0)")
+                .HasColumnName("PK_TEMPLATE_ID");
+            entity.Property(e => e.Action)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("ACTION");
+            entity.Property(e => e.AttachmentFile)
+                .HasMaxLength(500)
+                .IsUnicode(false)
+                .HasColumnName("ATTACHMENT_FILE");
+            entity.Property(e => e.Body).HasColumnName("BODY");
+            entity.Property(e => e.CreatedBy)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("CREATED_BY");
+            entity.Property(e => e.CreatedOn)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime")
+                .HasColumnName("CREATED_ON");
+            entity.Property(e => e.NotificationTypeId).HasColumnName("NOTIFICATION_TYPE_ID");
+            entity.Property(e => e.Subject)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .HasColumnName("SUBJECT");
+            entity.Property(e => e.TemplateName)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("TEMPLATE_NAME");
+            entity.Property(e => e.UpdatedBy)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("UPDATED_BY");
+            entity.Property(e => e.UpdatedOn)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime")
+                .HasColumnName("UPDATED_ON");
+
+            entity.HasOne(d => d.NotificationType).WithMany(p => p.NotificationTemplates)
+                .HasForeignKey(d => d.NotificationTypeId)
+                .HasConstraintName("FK_NOTIFI_TYPE");
+        });
+
+        modelBuilder.Entity<NotificationType>(entity =>
+        {
+            entity.HasKey(e => e.TypeId).HasName("PK__NOTIFICA__41F99A5209FC1DA3");
+
+            entity.ToTable("NOTIFICATION_TYPE");
+
+            entity.Property(e => e.TypeId)
+                .ValueGeneratedNever()
+                .HasColumnName("TYPE_ID");
+            entity.Property(e => e.TypeName)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .HasColumnName("TYPE_NAME");
         });
 
         modelBuilder.Entity<User>(entity =>
@@ -108,6 +224,95 @@ public partial class TiktokishContext : DbContext
                 .HasDefaultValue("User")
                 .HasColumnName("ROLE");
             entity.Property(e => e.Updatedat).HasColumnName("UPDATEDAT");
+            entity.Property(e => e.Username)
+                .HasMaxLength(50)
+                .HasColumnName("USERNAME");
+        });
+
+        modelBuilder.Entity<UserNotificationSubscribtion>(entity =>
+        {
+            entity.HasKey(e => e.PkUserSubscribtionId).HasName("PK_ACCOUNT_SUBSCRIBTION");
+
+            entity.ToTable("USER_NOTIFICATION_SUBSCRIBTION");
+
+            entity.Property(e => e.PkUserSubscribtionId).HasColumnName("PK_USER_SUBSCRIBTION_ID");
+            entity.Property(e => e.CreatedBy)
+                .HasMaxLength(100)
+                .HasDefaultValue("system")
+                .HasColumnName("CREATED_BY");
+            entity.Property(e => e.CreatedOn)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime")
+                .HasColumnName("CREATED_ON");
+            entity.Property(e => e.IsAllowed).HasColumnName("IS_ALLOWED");
+            entity.Property(e => e.NotificationType).HasColumnName("NOTIFICATION_TYPE");
+            entity.Property(e => e.UpdatedBy)
+                .HasMaxLength(100)
+                .HasDefaultValue("system")
+                .HasColumnName("UPDATED_BY");
+            entity.Property(e => e.UpdatedOn)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime")
+                .HasColumnName("UPDATED_ON");
+            entity.Property(e => e.Username)
+                .HasMaxLength(50)
+                .HasColumnName("USERNAME");
+        });
+
+        modelBuilder.Entity<UserOtp>(entity =>
+        {
+            entity.ToTable("USER_OTP");
+
+            entity.Property(e => e.Id)
+                .ValueGeneratedOnAdd()
+                .HasColumnType("decimal(19, 0)")
+                .HasColumnName("ID");
+            entity.Property(e => e.CreatedBy)
+                .HasMaxLength(30)
+                .IsUnicode(false)
+                .HasColumnName("CREATED_BY");
+            entity.Property(e => e.CreatedOn)
+                .HasPrecision(3)
+                .HasColumnName("CREATED_ON");
+            entity.Property(e => e.EmailOtp)
+                .HasMaxLength(255)
+                .IsUnicode(false)
+                .HasColumnName("EMAIL_OTP");
+            entity.Property(e => e.ExpiryDate)
+                .HasPrecision(6)
+                .HasColumnName("EXPIRY_DATE");
+            entity.Property(e => e.InvalidRetry)
+                .HasMaxLength(1)
+                .IsUnicode(false)
+                .HasColumnName("INVALID_RETRY");
+            entity.Property(e => e.Issplit)
+                .HasMaxLength(255)
+                .IsUnicode(false)
+                .HasColumnName("ISSPLIT");
+            entity.Property(e => e.Otpexpiry)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("OTPEXPIRY");
+            entity.Property(e => e.Otptype)
+                .HasMaxLength(255)
+                .IsUnicode(false)
+                .HasColumnName("OTPTYPE");
+            entity.Property(e => e.RetryCount)
+                .HasMaxLength(255)
+                .IsUnicode(false)
+                .HasColumnName("RETRY_COUNT");
+            entity.Property(e => e.SmsOtp)
+                .HasMaxLength(255)
+                .IsUnicode(false)
+                .HasColumnName("SMS_OTP");
+            entity.Property(e => e.Status).HasColumnName("STATUS");
+            entity.Property(e => e.UpdatedBy)
+                .HasMaxLength(30)
+                .IsUnicode(false)
+                .HasColumnName("UPDATED_BY");
+            entity.Property(e => e.UpdatedOn)
+                .HasPrecision(3)
+                .HasColumnName("UPDATED_ON");
             entity.Property(e => e.Username)
                 .HasMaxLength(50)
                 .HasColumnName("USERNAME");
