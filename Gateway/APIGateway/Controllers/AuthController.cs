@@ -20,17 +20,22 @@ public class AuthController : ControllerBase
 	private readonly HttpClient _httpClient;
 	private readonly IConfiguration _configuration;
 
-	public AuthController(IHttpClientFactory httpClientFactory, IDistributedCache cache, Func<string, IHTTPHelper> httpHelperFactory, IHttpContextAccessor httpContextAccessor, HttpClient httpClient, IConfiguration configuration)
-	{
-		_httpClientFactory = httpClientFactory;
-		_cache = cache;
-		_configuration = configuration;
-		_httpHelper = httpHelperFactory(_configuration["Services:UserService"]);
-		//httpHelperFactory("https://localhost:44323");
-		//_httpAuthHelper = httpHelperFactory("https://localhost:44333");
-		_httpContextAccessor = httpContextAccessor;
-		_httpClient = httpClient;
-	}
+    public AuthController(IHttpClientFactory httpClientFactory, IDistributedCache cache, Func<string, IHTTPHelper> httpHelperFactory, IHttpContextAccessor httpContextAccessor, HttpClient httpClient, IConfiguration configuration)
+    {
+        _httpClientFactory = httpClientFactory;
+        _cache = cache;
+        _configuration = configuration;
+        var userServiceUrl = _configuration["Services:UserService"];
+        if (string.IsNullOrEmpty(userServiceUrl))
+        {
+            throw new ArgumentNullException(nameof(userServiceUrl), "UserService URL configuration is missing.");
+        }
+        _httpHelper = httpHelperFactory(userServiceUrl);
+        //httpHelperFactory("https://localhost:44323");
+        //_httpAuthHelper = httpHelperFactory("https://localhost:44333");
+        _httpContextAccessor = httpContextAccessor;
+        _httpClient = httpClient;
+    }
 
 	[HttpPost("logincache")]
 	public async Task<IActionResult> LoginFromCache([FromBody] UserLogin user)
