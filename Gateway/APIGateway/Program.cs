@@ -24,7 +24,7 @@ try
 	var builder = WebApplication.CreateBuilder(args);
 
 	// Add services to the container.
-	builder.Services.AddScoped<IUserManager, UserManager>();
+	
 
 	builder.Logging.ClearProviders();
 	builder.Host.UseNLog();
@@ -74,9 +74,9 @@ try
 				ValidateAudience = true,
 				ValidateLifetime = true,
 				ValidateIssuerSigningKey = true,
-				ValidIssuer = "yourdomain.com",
-				ValidAudience = "yourdomain.com",
-				IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("your_super_secret_key_1111111111"))
+				ValidIssuer = GlobalConfiguration.TokenIssuer,
+				ValidAudience = GlobalConfiguration.TokenAudience,
+				IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(GlobalConfiguration.TokenSecretKey))
 			};
 		});
 

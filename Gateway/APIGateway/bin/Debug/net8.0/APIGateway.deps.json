@@ -889,14 +889,6 @@
           }
         }
       },
-      "DataAccess/1.0.0": {
-        "runtime": {
-          "DataAccess.exe": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
-        }
-      },
       "DataAccessLayer/1.0.0": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "8.0.19",
@@ -925,7 +917,6 @@
       "UserService/1.0.0": {
         "dependencies": {
           "Common": "1.0.0",
-          "DataAccess": "1.0.0",
           "DataAccessLayer": "1.0.0",
           "EntityFramework": "6.5.1",
           "Extension.Security": "1.0.0",
@@ -1523,11 +1514,6 @@
       "hashPath": "system.windows.extensions.6.0.0.nupkg.sha512"
     },
     "Common/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "DataAccess/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

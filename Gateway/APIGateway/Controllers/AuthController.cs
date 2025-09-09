@@ -24,11 +24,12 @@ public class AuthController : ControllerBase
 	{
 		_httpClientFactory = httpClientFactory;
 		_cache = cache;
-		_httpHelper = httpHelperFactory("https://localhost:44323");
+		_configuration = configuration;
+		_httpHelper = httpHelperFactory(_configuration["Services:UserService"]);
+		//httpHelperFactory("https://localhost:44323");
 		//_httpAuthHelper = httpHelperFactory("https://localhost:44333");
 		_httpContextAccessor = httpContextAccessor;
 		_httpClient = httpClient;
-		_configuration = configuration;
 	}
 
 	[HttpPost("logincache")]
@@ -233,12 +234,12 @@ public class AuthController : ControllerBase
 	//		new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
 	//	};
 
-	//	var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("your_super_secret_key_1111111111"));
+	//	var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(GlobalConfiguration.ToeknSecretKey));
 	//	var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
 	//	var token = new JwtSecurityToken(
-	//		issuer: "yourdomain.com",
-	//		audience: "yourdomain.com",
+	//		issuer: GlobalConfiguration.TokenIssuer,
+	//		audience: GlobalConfiguration.TokenAdience,
 	//		claims: claims,
 	//		expires: DateTime.Now.AddMinutes(30),
 	//		signingCredentials: creds);

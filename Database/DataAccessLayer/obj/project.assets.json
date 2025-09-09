@@ -4007,23 +4007,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Remi\\.nuget\\packages\\": {},
+    "C:\\Users\\khalid.halim\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Live Work\\Tiktok China\\Database\\DataAccessLayer\\DataAccessLayer.csproj",
+      "projectUniqueName": "D:\\Personal\\Tiktokish\\Code\\Database\\DataAccessLayer\\DataAccessLayer.csproj",
       "projectName": "DataAccessLayer",
-      "projectPath": "D:\\Live Work\\Tiktok China\\Database\\DataAccessLayer\\DataAccessLayer.csproj",
-      "packagesPath": "C:\\Users\\Remi\\.nuget\\packages\\",
-      "outputPath": "D:\\Live Work\\Tiktok China\\Database\\DataAccessLayer\\obj\\",
+      "projectPath": "D:\\Personal\\Tiktokish\\Code\\Database\\DataAccessLayer\\DataAccessLayer.csproj",
+      "packagesPath": "C:\\Users\\khalid.halim\\.nuget\\packages\\",
+      "outputPath": "D:\\Personal\\Tiktokish\\Code\\Database\\DataAccessLayer\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Remi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\khalid.halim\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -4032,7 +4032,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

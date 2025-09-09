@@ -1,3 +1,4 @@
+using Common;
 using Common.Implementation;
 using Common.Interface;
 using Extension.Security.Implementation;
@@ -33,6 +34,10 @@ try
 
 	// Add services to the container.
 	builder.Services.AddScoped<IUserManager, UserManager>();
+	builder.Services.AddScoped<INotificationManager, NotificationManager>();
+	builder.Services.AddScoped<IEmailHelper, EmailHelper>();
+	builder.Services.AddScoped<ISMSHelper, SMSHelper>();
+	builder.Services.AddScoped<IPushNotificationHelper, PushNotificationHelper>();
 
 	var app = builder.Build();
 

@@ -1811,15 +1811,6 @@
           "bin/placeholder/Common.dll": {}
         }
       },
-      "DataAccess/1.0.0": {
-        "type": "project",
-        "compile": {
-          "bin/placeholder/DataAccess.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/DataAccess.dll": {}
-        }
-      },
       "DataAccessLayer/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
@@ -3588,6 +3579,7 @@
       "path": "runtime.win-arm64.runtime.native.system.data.sqlclient.sni/4.4.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "runtime.win-arm64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
@@ -3603,6 +3595,7 @@
       "path": "runtime.win-x64.runtime.native.system.data.sqlclient.sni/4.4.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "runtime.win-x64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
@@ -3618,6 +3611,7 @@
       "path": "runtime.win-x86.runtime.native.system.data.sqlclient.sni/4.4.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
@@ -4909,11 +4903,6 @@
       "path": "../../CommonLib/Common/Common.csproj",
       "msbuildProject": "../../CommonLib/Common/Common.csproj"
     },
-    "DataAccess/1.0.0": {
-      "type": "project",
-      "path": "../../DataAccess/DataAccess.csproj",
-      "msbuildProject": "../../DataAccess/DataAccess.csproj"
-    },
     "DataAccessLayer/1.0.0": {
       "type": "project",
       "path": "../../Database/DataAccessLayer/DataAccessLayer.csproj",
@@ -4928,7 +4917,6 @@
   "projectFileDependencyGroups": {
     "net8.0": [
       "Common >= 1.0.0",
-      "DataAccess >= 1.0.0",
       "DataAccessLayer >= 1.0.0",
       "EntityFramework >= 6.5.1",
       "Extension.Security >= 1.0.0",
@@ -4939,23 +4927,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Remi\\.nuget\\packages\\": {},
+    "C:\\Users\\khalid.halim\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Live Work\\Tiktok China\\MicroServices\\UserService\\UserService.csproj",
+      "projectUniqueName": "D:\\Personal\\Tiktokish\\Code\\MicroServices\\UserService\\UserService.csproj",
       "projectName": "UserService",
-      "projectPath": "D:\\Live Work\\Tiktok China\\MicroServices\\UserService\\UserService.csproj",
-      "packagesPath": "C:\\Users\\Remi\\.nuget\\packages\\",
-      "outputPath": "D:\\Live Work\\Tiktok China\\MicroServices\\UserService\\obj\\",
+      "projectPath": "D:\\Personal\\Tiktokish\\Code\\MicroServices\\UserService\\UserService.csproj",
+      "packagesPath": "C:\\Users\\khalid.halim\\.nuget\\packages\\",
+      "outputPath": "D:\\Personal\\Tiktokish\\Code\\MicroServices\\UserService\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Remi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\khalid.halim\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -4964,24 +4952,20 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\Live Work\\Tiktok China\\BusinessLogic\\Extension.Security\\Extension.Security.csproj": {
-              "projectPath": "D:\\Live Work\\Tiktok China\\BusinessLogic\\Extension.Security\\Extension.Security.csproj"
+            "D:\\Personal\\Tiktokish\\Code\\BusinessLogic\\Extension.Security\\Extension.Security.csproj": {
+              "projectPath": "D:\\Personal\\Tiktokish\\Code\\BusinessLogic\\Extension.Security\\Extension.Security.csproj"
             },
-            "D:\\Live Work\\Tiktok China\\CommonLib\\Common\\Common.csproj": {
-              "projectPath": "D:\\Live Work\\Tiktok China\\CommonLib\\Common\\Common.csproj"
+            "D:\\Personal\\Tiktokish\\Code\\CommonLib\\Common\\Common.csproj": {
+              "projectPath": "D:\\Personal\\Tiktokish\\Code\\CommonLib\\Common\\Common.csproj"
             },
-            "D:\\Live Work\\Tiktok China\\DataAccess\\DataAccess.csproj": {
-              "projectPath": "D:\\Live Work\\Tiktok China\\DataAccess\\DataAccess.csproj"
-            },
-            "D:\\Live Work\\Tiktok China\\Database\\DataAccessLayer\\DataAccessLayer.csproj": {
-              "projectPath": "D:\\Live Work\\Tiktok China\\Database\\DataAccessLayer\\DataAccessLayer.csproj"
+            "D:\\Personal\\Tiktokish\\Code\\Database\\DataAccessLayer\\DataAccessLayer.csproj": {
+              "projectPath": "D:\\Personal\\Tiktokish\\Code\\Database\\DataAccessLayer\\DataAccessLayer.csproj"
             }
           }
         }
