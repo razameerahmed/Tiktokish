@@ -1,6 +1,6 @@
 -- All Tables
-Scaffold-DbContext "Server=AS-EFT-KHALID\KHALID;Database=Tiktokish;User ID=avanza;Password=avanza123;Trusted_Connection=False;Encrypt=True;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer --output-dir Models --force
+Scaffold-DbContext "Server=AS-EFT-KHALID\KHALID;Database=Tiktokish;User ID=avanza;Password=avanza123;Trusted_Connection=False;Encrypt=True;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -outputdir Models -force
 
 
 -- Specific Tables
-Scaffold-DbContext "Server=AS-EFT-KHALID\KHALID;Database=Tiktokish;User ID=avanza;Password=avanza123;Trusted_Connection=False;Encrypt=True;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer --output-dir Models --table USER --force
+Scaffold-DbContext "Server=AS-EFT-KHALID\KHALID;Database=Tiktokish;User ID=avanza;Password=avanza123;Trusted_Connection=False;Encrypt=True;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -outputdir Models -table USER -force

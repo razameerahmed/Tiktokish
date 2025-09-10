@@ -18,7 +18,7 @@ try
 {
 	var builder = WebApplication.CreateBuilder(args);
 
-    ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, "User Service Starting", ActionType.View.ToString(), "", "User", "machine name", "", "User account created", 1);
+    ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, "User Service Starting", ActionType.View.ToString(), "", "User", "machine name", "", "User Service Starting", 1);
 
     // Add services (like DI, controllers, DB, etc.)
     builder.Services.AddControllers();

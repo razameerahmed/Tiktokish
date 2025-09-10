@@ -31,14 +31,12 @@ namespace Extension.Security.Implementation
             _emailHelper = emailHelper;
 			_smsHelper = smsHelper;
             _pushNotificationHelper = pushNotificationHelper;
-
         }
-		public async Task<bool> GenerateOTP(string header, string tranMessage)
+		public async Task<bool> GenerateOTP(string header, string tranMessage,string sendTo)
         {
             await _smsHelper.GenerateSMS("");
-            await _emailHelper.GenerateEmail("Login Email","Successfull Login");
+            await _emailHelper.GenerateEmail("Login Email","Successfull Login", sendTo);
             await _pushNotificationHelper.GeneratePushNotification("");
-
 
 			return true;
         }

@@ -1,4 +1,5 @@
-﻿using Common.Implementation;
+﻿using Azure.Core;
+using Common.Implementation;
 using Common.Interface;
 using Common.Model;
 using DataAccessLayer.Models;
@@ -31,14 +32,14 @@ namespace Extension.Security.Implementation
         }
         public bool TestConnection(string header, string tranMessage)
         {
-            using (TiktokishContext context = new("Data Source=AS-BSD-RAZAMER\\RAZAMEER;Initial Catalog=Tiktokish;Persist Security Info=True;User ID=sa;Password=avanza@123;"))
-            {
-                var users = context.Users.ToList();
-                foreach (var user in users)
-                {
-                    Console.WriteLine($"{user.Id} - {user.Username}");
-                }
-            }
+            //    using (TiktokishContext context = new("Data Source=AS-BSD-RAZAMER\\RAZAMEER;Initial Catalog=Tiktokish;Persist Security Info=True;User ID=sa;Password=avanza@123;"))
+            //    {
+            //        var users = context.Users.ToList();
+            //        foreach (var user in users)
+            //        {
+            //            Console.WriteLine($"{user.Id} - {user.Username}");
+            //        }
+            //    }
 
             return true;
         }
@@ -46,10 +47,9 @@ namespace Extension.Security.Implementation
         {
             try
             {
-                string issuer = GlobalConfiguration.TokenIssuer;
-
                 ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), request.correlationId, request.Username, "machine name", this.GetType().Name, "Login", 1);
-                string token = request.Token;
+                string token = IsJwtToken(request.Token) == true ? request.Token : null;
+
                 using (TiktokishContext context = new(_connectionString))
                 {
                     //var users = context.UserInfos.ToList();
@@ -79,9 +79,9 @@ namespace Extension.Security.Implementation
                             response.Message = "Invalid Password.";
                             response.Status = false;
                         }
-                        //else if (token == null || token == "")
+                        //else if (token)
                         //{
-                            response.Data.Token = RefreshToken(user.Username, token, issuer);//GenerateJwtToken(user.Username);
+                            response.Data.Token = RefreshToken(request);//GenerateJwtToken(user.Username);
                         //}
 
                         if (userDevice == null)
@@ -94,7 +94,7 @@ namespace Extension.Security.Implementation
                                 Blacklist = 0,
                                 Bmv = "",
                                 DeviceName = request.DeviceId,
-                                DeviceCountryCode = "PK",
+                                DeviceCountryCode = request.CountryCode,
                                 DeviceFirstSignIn = DateTime.Now,
                                 Devicetype = "Android",
                                 DeviceIp = "1.1.1.1",
@@ -111,8 +111,12 @@ namespace Extension.Security.Implementation
 
                         response.Data.Username = user.Username;
                         response.Data.IsVerified = user.Isverified;
+
+                        // Send Login Email
+                        _notificationManager.GenerateOTP("header", "tranMessage", user.Email).Wait();
                     }
                 }
+
             }
             catch (Exception ex)
             {
@@ -306,11 +310,11 @@ namespace Extension.Security.Implementation
             return response;
         }
 
-        public string RefreshToken(string userName, string token, string requestDomain)
+        public string RefreshToken(Common.Model.LoginRequest request)
         {
-            if (ValidateToken(token, userName, requestDomain))
+            if (ValidateToken(request))
             {
-                return GenerateJwtToken(userName);
+                return GenerateJwtToken(request.Username);
             }
             else
             {
@@ -361,11 +365,14 @@ namespace Extension.Security.Implementation
             return tokena;
         }
 
-        public static bool ValidateToken(string token, string requestUsername, string requestDomain)
+        // Fix for CS0026: Remove 'this' from static method context and use GlobalConfiguration.TokenIssuer instead
+        public static bool ValidateToken(Common.Model.LoginRequest request)
         {
+            ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), request.correlationId, request.Username, "machine name", "", "Add User", 1);
+
             var tokenHandler = new JwtSecurityTokenHandler();
 
-            var key = Encoding.UTF8.GetBytes(GlobalConfiguration.TokenSecretKey); // or Encoding.UTF8.GetBytes for raw keys
+            var key = Encoding.UTF8.GetBytes(GlobalConfiguration.TokenSecretKey);
 
             var validationParameters = new TokenValidationParameters
             {
@@ -384,25 +391,23 @@ namespace Extension.Security.Implementation
 
             try
             {
-                var principal = tokenHandler.ValidateToken(token, validationParameters, out SecurityToken validatedToken);
+                var principal = tokenHandler.ValidateToken(request.Token, validationParameters, out SecurityToken validatedToken);
 
                 var username = principal.Claims.First().Value;
                 var domain = principal.Claims.First().Issuer;
 
-                if (username == requestUsername && domain == requestDomain)
+                if (username == request.Username && domain == GlobalConfiguration.TokenIssuer)
                 {
-                    //Console.WriteLine("✅ Token is valid with correct username and domain.");
                     return true;
                 }
                 else
                 {
                     return false;
-                    //Console.WriteLine("Username or domain mismatch.");
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Token validation failed: {ex.Message}");
+                ActivityLogger.Instance.SystemLog(NLog.LogLevel.Error, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), request.correlationId, request.Username, "machine name", "", "Token validation failed: " + ex.Message, 0, ex);
             }
             return false;
         }
@@ -495,5 +500,12 @@ namespace Extension.Security.Implementation
             }
             return errors;
         }
+
+        private bool IsJwtToken(string token)
+        {
+            var regex = new Regex(@"^[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+$");
+            return regex.IsMatch(token);
+        }
+
     }
 }
