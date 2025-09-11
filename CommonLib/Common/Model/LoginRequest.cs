@@ -22,6 +22,8 @@
         public string? correlationId { get; set; } = null!;
         public bool? isSuccess { get; set; } = false;
 		public string? Token { get; set; } = null!;
+		public string? EmailOTP { get; set; } = null!;
+		public string? SMSOTP { get; set; } = null!;
 
 	}
 }

@@ -43,6 +43,7 @@ namespace Extension.Security.Implementation
 
             return true;
         }
+        
         public ResponseModel<LoginResponse> ValidateLogin(Common.Model.LoginRequest request, ResponseModel<LoginResponse> response)
         {
             try
@@ -128,7 +129,27 @@ namespace Extension.Security.Implementation
             return response;
         }
 
-        public ResponseModel<LoginResponse> AddUser(Common.Model.LoginRequest request, ResponseModel<LoginResponse> response)
+		public ResponseModel<LoginResponse> ValidateOTP(Common.Model.LoginRequest request, ResponseModel<LoginResponse> response)
+		{
+			try
+			{
+				ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), request.correlationId, request.Username, "machine name", this.GetType().Name, "Login", 1);
+				string token = IsJwtToken(request.Token) == true ? request.Token : null;
+
+                _notificationManager.ValidateOTP(request.Username, request.EmailOTP, request.SMSOTP);
+
+			}
+			catch (Exception ex)
+			{
+				ActivityLogger.Instance.SystemLog(NLog.LogLevel.Error, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), request.correlationId, request.Username, "machine name", this.GetType().Name, ex.Message, 0, ex);
+				response.Message += ex.Message;
+				response.Status = false;
+			}
+
+			return response;
+		}
+
+		public ResponseModel<LoginResponse> AddUser(Common.Model.LoginRequest request, ResponseModel<LoginResponse> response)
         {
             try
             {

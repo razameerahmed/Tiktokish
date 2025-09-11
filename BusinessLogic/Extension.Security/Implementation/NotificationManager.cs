@@ -53,6 +53,11 @@ namespace Extension.Security.Implementation
 			return true;
 		}
 
+		public async Task<bool> GenerateEmail(string userName, string sendTo)
+		{
+			await _emailHelper.GenerateEmail("Login Alert", $"Hello {userName}, \r\n We noticed a login to your account:\r\n\r\nDate: {DateTime.Now}    \r\nIP Address: [IP Address]\r\n\r\nIf this was you, no action is needed. If not, please reset your password immediately. ", sendTo);
+			return true;
+		}
 
 		public bool ValidateOTP(string userName, string emailOTP, string smsOTP)
 		{
