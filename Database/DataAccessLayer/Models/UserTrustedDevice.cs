@@ -7,7 +7,7 @@ public partial class UserTrustedDevice
 {
     public string PkTrustedDeviceId { get; set; } = null!;
 
-    public int Userid { get; set; }
+    public string Username { get; set; } = null!;
 
     public string? ReceiverId { get; set; }
 

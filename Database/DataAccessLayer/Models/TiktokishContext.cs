@@ -6,12 +6,16 @@ namespace DataAccessLayer.Models;
 
 public partial class TiktokishContext : DbContext
 {
-    public TiktokishContext(string connectionString)
+    public TiktokishContext()
     {
     }
 
     public TiktokishContext(DbContextOptions<TiktokishContext> options)
         : base(options)
+    {
+    }
+
+    public TiktokishContext(string connectionString)
     {
     }
 
@@ -43,9 +47,9 @@ public partial class TiktokishContext : DbContext
     {
         modelBuilder.Entity<AuditLog>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("AUDIT_LOG");
+            entity.HasKey(e => e.AuditLogId).HasName("PK__AUDIT_LO__EB5F6CBD0FE7CC92");
+
+            entity.ToTable("AUDIT_LOG");
 
             entity.Property(e => e.ActionDetail)
                 .IsUnicode(false)
@@ -62,7 +66,9 @@ public partial class TiktokishContext : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("ACTION_TYPE");
-            entity.Property(e => e.Userid).HasColumnName("USERID");
+            entity.Property(e => e.Username)
+                .HasMaxLength(50)
+                .HasColumnName("USERNAME");
         });
 
         modelBuilder.Entity<BulkNotification>(entity =>
@@ -340,7 +346,9 @@ public partial class TiktokishContext : DbContext
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime")
                 .HasColumnName("UPDATED_ON");
-            entity.Property(e => e.Userid).HasColumnName("USERID");
+            entity.Property(e => e.Username)
+                .HasMaxLength(50)
+                .HasColumnName("USERNAME");
         });
 
         modelBuilder.Entity<UserSessionHistory>(entity =>
@@ -383,12 +391,14 @@ public partial class TiktokishContext : DbContext
             entity.Property(e => e.SessionClearOn)
                 .HasPrecision(3)
                 .HasColumnName("SESSION_CLEAR_ON");
-            entity.Property(e => e.Userid).HasColumnName("USERID");
+            entity.Property(e => e.Username)
+                .HasMaxLength(50)
+                .HasColumnName("USERNAME");
         });
 
         modelBuilder.Entity<UserTrustedDevice>(entity =>
         {
-            entity.HasKey(e => new { e.PkTrustedDeviceId, e.Userid });
+            entity.HasKey(e => new { e.PkTrustedDeviceId, e.Username });
 
             entity.ToTable("USER_TRUSTED_DEVICE");
 
@@ -396,7 +406,9 @@ public partial class TiktokishContext : DbContext
                 .HasMaxLength(500)
                 .IsUnicode(false)
                 .HasColumnName("PK_TRUSTED_DEVICE_ID");
-            entity.Property(e => e.Userid).HasColumnName("USERID");
+            entity.Property(e => e.Username)
+                .HasMaxLength(50)
+                .HasColumnName("USERNAME");
             entity.Property(e => e.Blacklist)
                 .HasDefaultValue(0m)
                 .HasColumnType("decimal(38, 0)")

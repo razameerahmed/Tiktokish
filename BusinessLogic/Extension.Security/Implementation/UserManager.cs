@@ -1,4 +1,5 @@
 ﻿using Azure.Core;
+using Common;
 using Common.Implementation;
 using Common.Interface;
 using Common.Model;
@@ -21,6 +22,7 @@ namespace Extension.Security.Implementation
     {
         private readonly string _connectionString;
         private INotificationManager _notificationManager;
+       // private IAuditLogHelper _auditLog;
         public UserManager(IConfiguration configuration, INotificationManager notificationManager)
         {
             var connStr = configuration.GetConnectionString("DefaultConnection");
@@ -28,7 +30,7 @@ namespace Extension.Security.Implementation
                 throw new InvalidOperationException("Connection string 'DefaultConnection' is missing or null.");
             _connectionString = connStr;
             _notificationManager = notificationManager;
-
+            //_auditLog = auditLog;
         }
         public bool TestConnection(string header, string tranMessage)
         {
@@ -46,10 +48,11 @@ namespace Extension.Security.Implementation
         
         public ResponseModel<LoginResponse> ValidateLogin(Common.Model.LoginRequest request, ResponseModel<LoginResponse> response)
         {
+            IAuditLogHelper _auditLog = new AuditLogHelper(_connectionString);
             try
             {
                 ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), request.correlationId, request.Username, "machine name", this.GetType().Name, "Login", 1);
-                string token = IsJwtToken(request.Token) == true ? request.Token : null;
+                string token = request.Token;//IsJwtToken(request.Token) == true ? request.Token : null;
 
                 using (TiktokishContext context = new(_connectionString))
                 {
@@ -68,8 +71,8 @@ namespace Extension.Security.Implementation
                     {
                         var userDevice = context.UserTrustedDevices
                     .FirstOrDefault(ud =>
-                        ud.PkTrustedDeviceId == request.Username ||
-                        ud.Userid == user.Id);
+                        ud.PkTrustedDeviceId == request.DeviceId &&
+                        ud.Username == user.Username);
 
                         response.Status = true;
                         response.Message = "Success";
@@ -80,18 +83,20 @@ namespace Extension.Security.Implementation
                             response.Message = "Invalid Password.";
                             response.Status = false;
                         }
-                        //else if (token)
-                        //{
-                            response.Data.Token = RefreshToken(request);//GenerateJwtToken(user.Username);
-                        //}
+                        else if (string.IsNullOrWhiteSpace(token))
+                        {
+                            response.Data.Token = GenerateJwtToken(user.Username);//RefreshToken(request);
+                            _auditLog.AddAuditLog(user.Username, GlobalConfiguration.TokenIssuer, GlobalConfiguration.UserServiceAPI, response.Data);
+                        }
 
+                       //_auditLog.AddAuditLog(user.Username, GlobalConfiguration.ActionLoginSuccess, GlobalConfiguration.UserServiceAPI, newDevice);
                         if (userDevice == null)
                         {
                             // New device, add to trusted devices
                             UserTrustedDevice newDevice = new()
                             {
                                 PkTrustedDeviceId = request.DeviceId,
-                                Userid = user.Id,
+                                Username = user.Username,
                                 Blacklist = 0,
                                 Bmv = "",
                                 DeviceName = request.DeviceId,
@@ -108,13 +113,17 @@ namespace Extension.Security.Implementation
 
                             context.Add(newDevice);
                             context.SaveChanges();
+
+                            _auditLog.AddAuditLog(user.Username, GlobalConfiguration.ActionAdd, GlobalConfiguration.UserServiceAPI, newDevice);
                         }
 
+                        
                         response.Data.Username = user.Username;
                         response.Data.IsVerified = user.Isverified;
 
+                        _auditLog.AddAuditLog(user.Username, GlobalConfiguration.ActionLoginSuccess, GlobalConfiguration.UserServiceAPI,response);
                         // Send Login Email
-                        _notificationManager.NotifyUser(user.Username, user.Email);
+                        //_notificationManager.NotifyUser(user.Username, user.Email);
                     }
                 }
 

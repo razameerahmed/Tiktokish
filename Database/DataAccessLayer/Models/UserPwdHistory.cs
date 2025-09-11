@@ -7,7 +7,7 @@ public partial class UserPwdHistory
 {
     public string PwdHistoryId { get; set; } = null!;
 
-    public int Userid { get; set; }
+    public string Username { get; set; } = null!;
 
     public string Password { get; set; } = null!;
 

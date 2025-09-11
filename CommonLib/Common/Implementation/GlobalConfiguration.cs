@@ -8,11 +8,21 @@ namespace Common.Implementation
 {
 	public static class GlobalConfiguration
 	{
-		public static string TokenIssuer = "yourdomain.com";
-		public static string TokenAudience = "yourdomain.com";
-		public static string TokenSecretKey = "your_super_secret_key_1111111111";
-		public static string HashSalt = "TIKTOKISH";
-		public static int OTPExpiry = 5;
-		public static int TokenExpiry = 5;
+        public const string ActionLoginSuccess = "Login Success";
+        public const string ActionLoginFailed = "Login Failed";
+        public const string ActionAdd = "Add";
+        public const string ActionUpdate = "Update";
+        public const string ActionDelete = "Delete";
+        public const string ActionSearch = "Search";
+        public const string ActionExport = "Export";
+        public const string ActionImport = "Import";
+        public const string UserServiceAPI = "User Service";
+        public const string GatewayAPI = "Gateway Service";
+        public const string TokenIssuer = "yourdomain.com";
+		public const string TokenAudience = "yourdomain.com";
+		public const string TokenSecretKey = "your_super_secret_key_1111111111";
+		public const string HashSalt = "TIKTOKISH";
+		public const int OTPExpiry = 5;
+		public const int TokenExpiry = 5;
 	}
 }

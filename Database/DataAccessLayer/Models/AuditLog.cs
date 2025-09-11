@@ -5,7 +5,7 @@ namespace DataAccessLayer.Models;
 
 public partial class AuditLog
 {
-    public int Userid { get; set; }
+    public string Username { get; set; } = null!;
 
     public string ActionTimestamp { get; set; } = null!;
 
@@ -14,4 +14,6 @@ public partial class AuditLog
     public string ActionEntity { get; set; } = null!;
 
     public string? ActionDetail { get; set; }
+
+    public int AuditLogId { get; set; }
 }
