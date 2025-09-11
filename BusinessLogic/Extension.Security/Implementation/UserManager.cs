@@ -113,7 +113,7 @@ namespace Extension.Security.Implementation
                         response.Data.IsVerified = user.Isverified;
 
                         // Send Login Email
-                        _notificationManager.GenerateOTP("header", "tranMessage", user.Email).Wait();
+                        _notificationManager.GenerateOTP(user.Username, user.Email).Wait();
                     }
                 }
 

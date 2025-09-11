@@ -1801,6 +1801,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
+          "DataAccessLayer": "1.0.0",
           "Microsoft.Extensions.Http": "9.0.8",
           "NLog.Web.AspNetCore": "6.0.3"
         },

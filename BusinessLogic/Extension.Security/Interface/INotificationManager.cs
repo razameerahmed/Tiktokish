@@ -4,7 +4,9 @@ namespace Extension.Security.Interface
 {
 	public interface INotificationManager
 	{
-		public Task<bool> GenerateOTP(string header, string tranMessage,string sendTo);
-		
+		public Task<bool> GenerateOTP(string userName, string sendTo);
+		public bool ValidateOTP(string userName, string emailOTP, string smsOTP);
+
+
 	}
 }
