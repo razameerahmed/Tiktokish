@@ -21,24 +21,31 @@ public class AuthController : ControllerBase
 	private readonly HttpClient _httpClient;
 	private readonly IConfiguration _configuration;
 
-    public AuthController(IHttpClientFactory httpClientFactory, IDistributedCache cache, Func<string, IHTTPHelper> httpHelperFactory, IHttpContextAccessor httpContextAccessor, HttpClient httpClient, IConfiguration configuration)
+	public AuthController(IHttpClientFactory httpClientFactory, IDistributedCache cache, Func<string, IHTTPHelper> httpHelperFactory, IHttpContextAccessor httpContextAccessor, HttpClient httpClient, IConfiguration configuration)
+	{
+		_httpClientFactory = httpClientFactory;
+		_cache = cache;
+		_configuration = configuration;
+		var userServiceUrl = _configuration["Services:UserService"];
+		if (string.IsNullOrEmpty(userServiceUrl))
+		{
+			throw new ArgumentNullException(nameof(userServiceUrl), "UserService URL configuration is missing.");
+		}
+		_httpHelper = httpHelperFactory(userServiceUrl);
+		//httpHelperFactory("https://localhost:44323");
+		//_httpAuthHelper = httpHelperFactory("https://localhost:44333");
+		_httpContextAccessor = httpContextAccessor;
+		_httpClient = httpClient;
+	}
+
+    [HttpGet]
+    public IActionResult Index()
     {
-        _httpClientFactory = httpClientFactory;
-        _cache = cache;
-        _configuration = configuration;
-        var userServiceUrl = _configuration["Services:UserService"];
-        if (string.IsNullOrEmpty(userServiceUrl))
-        {
-            throw new ArgumentNullException(nameof(userServiceUrl), "UserService URL configuration is missing.");
-        }
-        _httpHelper = httpHelperFactory(userServiceUrl);
-        //httpHelperFactory("https://localhost:44323");
-        //_httpAuthHelper = httpHelperFactory("https://localhost:44333");
-        _httpContextAccessor = httpContextAccessor;
-        _httpClient = httpClient;
+        var request = Request;
+        return Ok("Gateway Service is running");
     }
 
-	[HttpPost("logincache")]
+    [HttpPost("logincache")]
 	public async Task<IActionResult> LoginFromCache([FromBody] UserLogin user)
 	{
 		string cacheKey = "";
@@ -89,10 +96,10 @@ public class AuthController : ControllerBase
 	public async Task<IActionResult> Login([FromBody] LoginRequest userRequest)
 	{
 		var correlationId = HttpContext.Request.Headers["X-Correlation-ID"].ToString();
-		 
+
 		try
 		{
-            var response = await _httpHelper.PostJsonAsync("/userservice/validatelogin", userRequest);
+			var response = await _httpHelper.PostJsonAsync("/userservice/validatelogin", userRequest);
 			ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), correlationId, userRequest.Username, "machine name", this.GetType().Name, "User logged in", 1);
 
 
@@ -206,8 +213,8 @@ public class AuthController : ControllerBase
 
 		if (string.IsNullOrEmpty(request.Username))
 		{
-            return BadRequest("Message Username is required");
-        }
+			return BadRequest("Message Username is required");
+		}
 		try
 		{
 			var response = await _httpHelper.PostJsonAsync("/userservice/validateusername", request);
@@ -222,24 +229,44 @@ public class AuthController : ControllerBase
 		}
 	}
 
-	//private string GenerateJwtToken(string username)
-	//{
-	//	var claims = new[]
-	//	{
-	//		new Claim(JwtRegisteredClaimNames.Sub, username),
-	//		new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-	//	};
+    //private string GenerateJwtToken(string username)
+    //{
+    //	var claims = new[]
+    //	{
+    //		new Claim(JwtRegisteredClaimNames.Sub, username),
+    //		new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+    //	};
 
-	//	var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(GlobalConfiguration.ToeknSecretKey));
-	//	var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+    //	var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(GlobalConfiguration.ToeknSecretKey));
+    //	var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-	//	var token = new JwtSecurityToken(
-	//		issuer: GlobalConfiguration.TokenIssuer,
-	//		audience: GlobalConfiguration.TokenAdience,
-	//		claims: claims,
-	//		expires: DateTime.Now.AddMinutes(30),
-	//		signingCredentials: creds);
+    //	var token = new JwtSecurityToken(
+    //		issuer: GlobalConfiguration.TokenIssuer,
+    //		audience: GlobalConfiguration.TokenAdience,
+    //		claims: claims,
+    //		expires: DateTime.Now.AddMinutes(30),
+    //		signingCredentials: creds);
 
-	//	return new JwtSecurityTokenHandler().WriteToken(token);
-	//}
+    //	return new JwtSecurityTokenHandler().WriteToken(token);
+    //}
+
+    [HttpPost("getallfeed")]
+    public async Task<IActionResult> GetAllFeed([FromBody] LoginRequest request)
+	{
+		var correlationId = HttpContext.Request.Headers["X-Correlation-ID"].ToString();
+		try
+		{
+			var response = await _httpHelper.PostJsonAsync("/userservice/getfeed", request);
+			ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), correlationId, request.Username, "machine name", this.GetType().Name, "Fetching feed", 1);
+
+			return Ok(
+				 response);
+
+		}
+		catch (Exception ex)
+		{
+			ActivityLogger.Instance.SystemLog(NLog.LogLevel.Error, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), correlationId, request.Username, "machine name", this.GetType().Name, ex.Message, 0, ex);
+			return BadRequest("Message" + ex);
+		}
+	}
 }

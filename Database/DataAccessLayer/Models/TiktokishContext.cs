@@ -6,7 +6,7 @@ namespace DataAccessLayer.Models;
 
 public partial class TiktokishContext : DbContext
 {
-    public TiktokishContext()
+    public TiktokishContext(string connectionString)
     {
     }
 
@@ -15,13 +15,11 @@ public partial class TiktokishContext : DbContext
     {
     }
 
-    public TiktokishContext(string connectionString)
-    {
-    }
-
     public virtual DbSet<AuditLog> AuditLogs { get; set; }
 
     public virtual DbSet<BulkNotification> BulkNotifications { get; set; }
+
+    public virtual DbSet<Feed> Feeds { get; set; }
 
     public virtual DbSet<NotificationTemplate> NotificationTemplates { get; set; }
 
@@ -111,6 +109,22 @@ public partial class TiktokishContext : DbContext
             entity.Property(e => e.Username)
                 .HasMaxLength(50)
                 .HasColumnName("USERNAME");
+        });
+
+        modelBuilder.Entity<Feed>(entity =>
+        {
+            entity.HasKey(e => e.FeedId).HasName("PK__Feed__1586DF552E2B691F");
+
+            entity.ToTable("Feed");
+
+            entity.HasIndex(e => new { e.Username, e.CreatedAt }, "IX_Feed_Username_CreatedAt").IsDescending(false, true);
+
+            entity.Property(e => e.Caption).HasMaxLength(500);
+            entity.Property(e => e.CreatedAt).HasDefaultValueSql("(getutcdate())");
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.ThumbnailUrl).HasMaxLength(500);
+            entity.Property(e => e.Username).HasMaxLength(50);
+            entity.Property(e => e.VideoUrl).HasMaxLength(500);
         });
 
         modelBuilder.Entity<NotificationTemplate>(entity =>

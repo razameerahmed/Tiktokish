@@ -1,10 +1,12 @@
 ﻿using Common.Implementation;
 using Common.Interface;
 using Common.Model;
+using DataAccessLayer.Models;
 using Extension.Security.Interface;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
+using System.Collections.Generic;
 
 
 namespace UserService.Controllers
@@ -106,5 +108,26 @@ namespace UserService.Controllers
 				return BadRequest(ex.Message);
 			}
 		}
-	}
+
+        [HttpPost("getfeed")]
+        public IActionResult GetFeed([FromBody] CommonUser request)
+        {
+            try
+            {
+                ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), request.CorrelationId, request.Username, "machine name", this.GetType().Name, "User Login", 1);
+
+                if (string.IsNullOrWhiteSpace(request.Username) || string.IsNullOrWhiteSpace(request.Password))
+                    return BadRequest("Username/Email/Phone and Password are required");
+
+                ResponseModel<List<Feed>> response = new ResponseModel<List<Feed>>();
+                var res = _userManager.GetFeed(request, response);
+                return Ok(res);
+            }
+            catch (Exception ex)
+            {
+                ActivityLogger.Instance.SystemLog(NLog.LogLevel.Error, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), request.CorrelationId, request.Username, "machine name", this.GetType().Name, ex.Message, 0, ex);
+                return BadRequest(ex.Message);
+            }
+        }
+    }
 }

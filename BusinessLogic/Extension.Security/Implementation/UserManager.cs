@@ -52,7 +52,7 @@ namespace Extension.Security.Implementation
             try
             {
                 ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), request.correlationId, request.Username, "machine name", this.GetType().Name, "Login", 1);
-                string token = request.Token;//IsJwtToken(request.Token) == true ? request.Token : null;
+                //string token = request.Token;//IsJwtToken(request.Token) == true ? request.Token : null;
 
                 using (TiktokishContext context = new(_connectionString))
                 {
@@ -83,11 +83,11 @@ namespace Extension.Security.Implementation
                             response.Message = "Invalid Password.";
                             response.Status = false;
                         }
-                        else if (string.IsNullOrWhiteSpace(token))
-                        {
+                        //else if (string.IsNullOrWhiteSpace(token))
+                        //{
                             response.Data.Token = GenerateJwtToken(user.Username);//RefreshToken(request);
                             _auditLog.AddAuditLog(user.Username, GlobalConfiguration.TokenIssuer, GlobalConfiguration.UserServiceAPI, response.Data);
-                        }
+                        //}
 
                        //_auditLog.AddAuditLog(user.Username, GlobalConfiguration.ActionLoginSuccess, GlobalConfiguration.UserServiceAPI, newDevice);
                         if (userDevice == null)
@@ -123,7 +123,7 @@ namespace Extension.Security.Implementation
 
                         _auditLog.AddAuditLog(user.Username, GlobalConfiguration.ActionLoginSuccess, GlobalConfiguration.UserServiceAPI,response);
                         // Send Login Email
-                        //_notificationManager.NotifyUser(user.Username, user.Email);
+                        _notificationManager.NotifyUser(user.Username, user.Email);
                     }
                 }
 
@@ -258,12 +258,16 @@ namespace Extension.Security.Implementation
                     .FirstOrDefault(u =>
                         u.Username == request.Username);
 
-                    if (user != null)
+                    if (user == null)
                     {
                         response.Message = "Username is available";
                         response.Status = true;
                     }
-                    response.Message = "Username is not available";
+                    else
+                    {
+                        response.Message = "Username is not available";
+                    }
+                        
                 }
             }
             catch (Exception ex)
@@ -337,6 +341,45 @@ namespace Extension.Security.Implementation
                 response.Message += ex.Message;
             }
             ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), request.CorrelationId, request.Username, "machine name", this.GetType().Name, response.Message, 1);
+            return response;
+        }
+
+        public ResponseModel<List<Feed>> GetFeed(CommonUser request, ResponseModel<List<Feed>> response)
+        {
+            IAuditLogHelper _auditLog = new AuditLogHelper(_connectionString);
+            //var response = new ResponseModel<LoginResponse>();
+            try
+            {
+                ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), request.CorrelationId, request.Username, "machine name", this.GetType().Name, "Login", 1);
+                response.Status = false;
+                using (TiktokishContext context = new(_connectionString))
+                {
+
+                    var result = context.Feeds
+               .Where(f => f.IsActive == true)               // Only active feeds
+               .OrderByDescending(f => f.CreatedAt)  // Latest first
+               .ToList();
+
+                    //var result = (from feed in context.Feeds select feed).ToList();
+                   
+                    
+                    response.Status = true;
+                    response.Message = "Success";
+                    //response.Data = new LoginResponse();
+                    response.Data = result;
+                    _auditLog.AddAuditLog(request.Username, GlobalConfiguration.ActionSearch, GlobalConfiguration.UserServiceAPI, response.Data);
+                }
+                   
+
+
+            }
+            catch (Exception ex)
+            {
+                ActivityLogger.Instance.SystemLog(NLog.LogLevel.Error, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), request.CorrelationId, request.Username, "machine name", this.GetType().Name, ex.Message, 0, ex);
+                response.Message += ex.Message;
+                response.Status = false;
+            }
+                
             return response;
         }
 
