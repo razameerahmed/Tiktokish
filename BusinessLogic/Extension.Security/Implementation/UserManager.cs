@@ -86,7 +86,7 @@ namespace Extension.Security.Implementation
                         //else if (string.IsNullOrWhiteSpace(token))
                         //{
                             response.Data.Token = GenerateJwtToken(user.Username);//RefreshToken(request);
-                            _auditLog.AddAuditLog(user.Username, GlobalConfiguration.TokenIssuer, GlobalConfiguration.UserServiceAPI, response.Data);
+                            _auditLog.AddAuditLog(user.Username, GlobalConfiguration.ActionTokenIssuer, GlobalConfiguration.UserServiceAPI, response.Data);
                         //}
 
                        //_auditLog.AddAuditLog(user.Username, GlobalConfiguration.ActionLoginSuccess, GlobalConfiguration.UserServiceAPI, newDevice);
@@ -131,7 +131,7 @@ namespace Extension.Security.Implementation
             catch (Exception ex)
             {
                 ActivityLogger.Instance.SystemLog(NLog.LogLevel.Error, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), request.correlationId, request.Username, "machine name", this.GetType().Name, ex.Message, 0, ex);
-                response.Message += ex.Message;
+                response.Message = "Failed to validate login.";
                 response.Status = false;
             }
 
@@ -180,8 +180,8 @@ namespace Extension.Security.Implementation
                     var user = context.Users
                     .FirstOrDefault(u =>
                         u.Username == request.Username ||
-                        u.Email == request.Username ||
-                        u.Phonenumber == request.Username);
+                        u.Email == request.Email ||
+                        u.Phonenumber == request.PhoneNumber);
 
                     if (user == null)
                     {
@@ -216,7 +216,7 @@ namespace Extension.Security.Implementation
                     }
                     else
                     {
-                        response.Message = "User already exists";
+                        response.Message = "Username, email or Phone number already exists, please use a unique value";
                         response.Data = null;
                     }
 
@@ -225,7 +225,7 @@ namespace Extension.Security.Implementation
             catch (Exception ex)
             {
                 ActivityLogger.Instance.SystemLog(NLog.LogLevel.Error, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), request.correlationId, request.Username, "machine name", this.GetType().Name, ex.Message, 0, ex);
-                response.Message += ex.Message;
+                response.Message = "Failed to add user.";
                 response.Status = false;
             }
             return response;
@@ -273,7 +273,7 @@ namespace Extension.Security.Implementation
             catch (Exception ex)
             {
                 ActivityLogger.Instance.SystemLog(NLog.LogLevel.Error, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), request.CorrelationId, request.Username, "machine name", this.GetType().Name, ex.Message, 0, ex);
-                response.Message += ex.Message;
+                response.Message = "Failed to validate username.";
                 response.Status = false;
             }
 
@@ -338,7 +338,7 @@ namespace Extension.Security.Implementation
             catch (Exception ex)
             {
                 ActivityLogger.Instance.SystemLog(NLog.LogLevel.Error, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), request.CorrelationId, request.Username, "machine name", this.GetType().Name, ex.Message, 0, ex);
-                response.Message += ex.Message;
+                response.Message = "Failed to update user.";
             }
             ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), request.CorrelationId, request.Username, "machine name", this.GetType().Name, response.Message, 1);
             return response;
@@ -376,7 +376,7 @@ namespace Extension.Security.Implementation
             catch (Exception ex)
             {
                 ActivityLogger.Instance.SystemLog(NLog.LogLevel.Error, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), request.CorrelationId, request.Username, "machine name", this.GetType().Name, ex.Message, 0, ex);
-                response.Message += ex.Message;
+                response.Message = "Failed to retrieve feed.";
                 response.Status = false;
             }
                 
@@ -433,9 +433,7 @@ namespace Extension.Security.Implementation
                 expires: DateTime.Now.AddMinutes(30),
                 signingCredentials: creds);
 
-            var tokena = new JwtSecurityTokenHandler().WriteToken(token);
-
-            return tokena;
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
         // Fix for CS0026: Remove 'this' from static method context and use GlobalConfiguration.TokenIssuer instead

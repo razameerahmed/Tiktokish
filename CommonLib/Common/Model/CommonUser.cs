@@ -4,7 +4,7 @@ namespace Common.Model
 {
 	public class CommonUser
 	{
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         public string Username { get; set; } = null!;
 
@@ -38,7 +38,7 @@ namespace Common.Model
 
         public string? Lastlocation { get; set; }
         public required string CorrelationId { get; set; }
-        public required string Password { get; set; }
+        public string? Password { get; set; }
         public string Token { get; set; }
         public UserTrustedDevice? UserTrustedDevice { get; set; }
     }

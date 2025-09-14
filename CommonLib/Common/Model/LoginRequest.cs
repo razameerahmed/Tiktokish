@@ -8,7 +8,7 @@
 
         public required string Username { get; set; }
         public required string? FullName { get; set; }
-        public required string Password { get; set; }
+        public required string? Password { get; set; }
         public required string? PhoneNumber { get; set; }         // Optional, but unique if provided
         public required string? CountryCode { get; set; }         // e.g. "+86"
         public required string? Email { get; set; }               // Optional, unique if provided

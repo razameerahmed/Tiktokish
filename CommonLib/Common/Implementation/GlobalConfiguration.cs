@@ -16,6 +16,7 @@ namespace Common.Implementation
         public const string ActionSearch = "Search";
         public const string ActionExport = "Export";
         public const string ActionImport = "Import";
+        public const string ActionTokenIssuer = "Token Issued";
         public const string UserServiceAPI = "User Service";
         public const string GatewayAPI = "Gateway Service";
         public const string TokenIssuer = "yourdomain.com";
