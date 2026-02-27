@@ -1,15 +1,5 @@
 [
   {
-    "ContainingType": "UserService.Controllers.HomeController",
-    "Method": "Index",
-    "RelativePath": "",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
     "ContainingType": "UserService.Controllers.UserServiceController",
     "Method": "Index",
     "RelativePath": "UserService",
@@ -39,22 +29,6 @@
     "ContainingType": "UserService.Controllers.UserServiceController",
     "Method": "EditUser",
     "RelativePath": "UserService/edituser",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "request",
-        "Type": "Common.Model.CommonUser",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "UserService.Controllers.UserServiceController",
-    "Method": "GetFeed",
-    "RelativePath": "UserService/getfeed",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,

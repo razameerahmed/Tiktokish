@@ -63,7 +63,7 @@ namespace Extension.Security.Implementation
 		{
 			try
 			{
-				using (TrackerContext context = new(_connectionString))
+				using (TiktokishContext context = new(_connectionString))
 				{
 					var userOTP = context.UserOtps.OrderByDescending( x => x.CreatedOn)
 					.FirstOrDefault(u =>
@@ -93,7 +93,7 @@ namespace Extension.Security.Implementation
 			UserOtp? data = null;
 			try
 			{
-				using (TrackerContext context = new(_connectionString))
+				using (TiktokishContext context = new(_connectionString))
 				{
 					data = new UserOtp
 					{

@@ -41,7 +41,7 @@ namespace Common
                 ? JsonSerializer.Serialize(actionDetail)
                 : null;
 
-            using (var context = new TrackerContext(_connectionString))
+            using (var context = new TiktokishContext(_connectionString))
             {
                 var auditLog = new AuditLog
                 {

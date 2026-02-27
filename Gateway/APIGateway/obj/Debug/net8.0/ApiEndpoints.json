@@ -1,35 +1,5 @@
 [
   {
-    "ContainingType": "APIGateway.Controllers.HomeController",
-    "Method": "Index",
-    "RelativePath": "",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "UserService.Controllers.HomeController",
-    "Method": "Index",
-    "RelativePath": "",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "AuthController",
-    "Method": "Index",
-    "RelativePath": "api/Auth",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
     "ContainingType": "AuthController",
     "Method": "CreateUserAccount",
     "RelativePath": "api/Auth/createuseraccount",
@@ -38,8 +8,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "userRequest",
-        "Type": "Common.Model.LoginRequest",
+        "Name": "user",
+        "Type": "Common.Model.UserLogin",
         "IsRequired": true
       }
     ],
@@ -63,22 +33,6 @@
   },
   {
     "ContainingType": "AuthController",
-    "Method": "GetAllFeed",
-    "RelativePath": "api/Auth/getallfeed",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "request",
-        "Type": "Common.Model.LoginRequest",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "AuthController",
     "Method": "Login",
     "RelativePath": "api/Auth/login",
     "HttpMethod": "POST",
@@ -86,8 +40,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "userRequest",
-        "Type": "Common.Model.LoginRequest",
+        "Name": "user",
+        "Type": "Common.Model.UserLogin",
         "IsRequired": true
       }
     ],
@@ -118,11 +72,21 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "request",
+        "Name": "user",
         "Type": "Common.Model.CommonUser",
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "APIGateway.Controllers.HomeController",
+    "Method": "GetValues",
+    "RelativePath": "api/Home",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
@@ -155,22 +119,6 @@
     "ContainingType": "UserService.Controllers.UserServiceController",
     "Method": "EditUser",
     "RelativePath": "UserService/edituser",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "request",
-        "Type": "Common.Model.CommonUser",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "UserService.Controllers.UserServiceController",
-    "Method": "GetFeed",
-    "RelativePath": "UserService/getfeed",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
