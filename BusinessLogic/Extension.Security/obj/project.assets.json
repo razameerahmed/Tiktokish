@@ -3168,11 +3168,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Personal\\Tiktokish\\Code\\BusinessLogic\\Extension.Security\\Extension.Security.csproj",
+      "projectUniqueName": "D:\\Personal\\Tracker\\Code\\BusinessLogic\\Extension.Security\\Extension.Security.csproj",
       "projectName": "Extension.Security",
-      "projectPath": "D:\\Personal\\Tiktokish\\Code\\BusinessLogic\\Extension.Security\\Extension.Security.csproj",
+      "projectPath": "D:\\Personal\\Tracker\\Code\\BusinessLogic\\Extension.Security\\Extension.Security.csproj",
       "packagesPath": "C:\\Users\\khalid.halim\\.nuget\\packages\\",
-      "outputPath": "D:\\Personal\\Tiktokish\\Code\\BusinessLogic\\Extension.Security\\obj\\",
+      "outputPath": "D:\\Personal\\Tracker\\Code\\BusinessLogic\\Extension.Security\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -3193,11 +3193,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\Personal\\Tiktokish\\Code\\CommonLib\\Common\\Common.csproj": {
-              "projectPath": "D:\\Personal\\Tiktokish\\Code\\CommonLib\\Common\\Common.csproj"
+            "D:\\Personal\\Tracker\\Code\\CommonLib\\Common\\Common.csproj": {
+              "projectPath": "D:\\Personal\\Tracker\\Code\\CommonLib\\Common\\Common.csproj"
             },
-            "D:\\Personal\\Tiktokish\\Code\\Database\\DataAccessLayer\\DataAccessLayer.csproj": {
-              "projectPath": "D:\\Personal\\Tiktokish\\Code\\Database\\DataAccessLayer\\DataAccessLayer.csproj"
+            "D:\\Personal\\Tracker\\Code\\Database\\DataAccessLayer\\DataAccessLayer.csproj": {
+              "projectPath": "D:\\Personal\\Tracker\\Code\\Database\\DataAccessLayer\\DataAccessLayer.csproj"
             }
           }
         }

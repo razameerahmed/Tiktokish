@@ -34,7 +34,7 @@ namespace Extension.Security.Implementation
         }
         public bool TestConnection(string header, string tranMessage)
         {
-            //    using (TiktokishContext context = new("Data Source=AS-BSD-RAZAMER\\RAZAMEER;Initial Catalog=Tiktokish;Persist Security Info=True;User ID=sa;Password=avanza@123;"))
+            //    using (TrackerContext context = new("Data Source=AS-BSD-RAZAMER\\RAZAMEER;Initial Catalog=Tracker;Persist Security Info=True;User ID=sa;Password=avanza@123;"))
             //    {
             //        var users = context.Users.ToList();
             //        foreach (var user in users)
@@ -54,7 +54,7 @@ namespace Extension.Security.Implementation
                 ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), request.correlationId, request.Username, "machine name", this.GetType().Name, "Login", 1);
                 //string token = request.Token;//IsJwtToken(request.Token) == true ? request.Token : null;
 
-                using (TiktokishContext context = new(_connectionString))
+                using (TrackerContext context = new(_connectionString))
                 {
                     //var users = context.UserInfos.ToList();
                     var user = context.Users
@@ -175,7 +175,7 @@ namespace Extension.Security.Implementation
 
                 string token = request.Token;
                 response.Data = new LoginResponse();
-                using (TiktokishContext context = new(_connectionString))
+                using (TrackerContext context = new(_connectionString))
                 {
                     var user = context.Users
                     .FirstOrDefault(u =>
@@ -252,7 +252,7 @@ namespace Extension.Security.Implementation
                     return response;
                 }
 
-                using (TiktokishContext context = new(_connectionString))
+                using (TrackerContext context = new(_connectionString))
                 {
                     var user = context.Users
                     .FirstOrDefault(u =>
@@ -288,7 +288,7 @@ namespace Extension.Security.Implementation
                 string token = request.Token;
                 response.Data = new LoginResponse();
                 response.Status = false;
-                using (TiktokishContext context = new(_connectionString))
+                using (TrackerContext context = new(_connectionString))
                 {
                     var user = context.Users
                     .FirstOrDefault(u =>
@@ -352,7 +352,7 @@ namespace Extension.Security.Implementation
             {
                 ActivityLogger.Instance.SystemLog(NLog.LogLevel.Info, string.Format("Executing Method {0}", System.Reflection.MethodBase.GetCurrentMethod().Name), ActionType.View.ToString(), request.CorrelationId, request.Username, "machine name", this.GetType().Name, "Login", 1);
                 response.Status = false;
-                using (TiktokishContext context = new(_connectionString))
+                using (TrackerContext context = new(_connectionString))
                 {
 
                     var result = context.Feeds

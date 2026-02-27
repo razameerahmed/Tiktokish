@@ -22,7 +22,7 @@ namespace Common.Implementation
         public const string TokenIssuer = "yourdomain.com";
 		public const string TokenAudience = "yourdomain.com";
 		public const string TokenSecretKey = "your_super_secret_key_1111111111";
-		public const string HashSalt = "TIKTOKISH";
+		public const string HashSalt = "Tracker";
 		public const int OTPExpiry = 5;
 		public const int TokenExpiry = 5;
 	}
